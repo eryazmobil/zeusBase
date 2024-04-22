@@ -17,6 +17,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         buildConfigField "String", "BASE_URL", BASE_URL
+        buildConfigField "String", "BASE_OUT_URL", BASE_OUT_URL
     }
 
     buildTypes {

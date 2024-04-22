@@ -1,21 +1,22 @@
 package eryaz.software.zeusBase.data.di
 
 import eryaz.software.zeusBase.data.api.client.ZeusClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val appModuleApis = module {
 
-    single { ZeusClient.provideApi() }
+    single { ZeusClient.provideApi(androidContext()) }
 
-    single { ZeusClient.provideUserApi() }
+    single { ZeusClient.provideUserApi(androidContext()) }
 
-    single { ZeusClient.provideWorkActivityApi() }
+    single { ZeusClient.provideWorkActivityApi(androidContext()) }
 
-    single { ZeusClient.provideBarcodeApi() }
+    single { ZeusClient.provideBarcodeApi(androidContext()) }
 
-    single { ZeusClient.providePlacementApi() }
+    single { ZeusClient.providePlacementApi(androidContext()) }
 
-    single { ZeusClient.provideOrderApi() }
+    single { ZeusClient.provideOrderApi(androidContext()) }
 
-    single { ZeusClient.provideCountingApi() }
+    single { ZeusClient.provideCountingApi(androidContext()) }
 }

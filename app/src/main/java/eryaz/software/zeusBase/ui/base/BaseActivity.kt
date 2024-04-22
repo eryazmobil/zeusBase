@@ -2,6 +2,8 @@ package eryaz.software.zeusBase.ui.base
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import eryaz.software.zeusBase.data.persistence.SessionManager
@@ -25,4 +27,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun getContentView(): View
+
+
 }
