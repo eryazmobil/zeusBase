@@ -142,4 +142,53 @@ class CountingRepo(private val api: CountingService) : BaseRepo() {
         ResponseHandler.handleSuccess(response, response.success)
     }
 
+    suspend fun getPdaPartialStockTakingWorkActivityAndSTHeader(
+        companyId: Int,
+        warehouseId: Int
+    ) = callApi {
+        val response = api.getPdaPartialStockTakingWorkActivityAndSTHeader(
+            companyId,
+            warehouseId
+        )
+        ResponseHandler.handleSuccess(response,response.result.id)
+    }
+
+    suspend fun createSTDetailWithUserAndShelvesPartial(
+        stHeaderId : Int,
+        assignedUserId: Int,
+        shelfId : Int
+    ) = callApi {
+        val response = api.createSTDetailWithUserAndShelvesPartial(
+            stHeaderId,
+            assignedUserId,
+            shelfId
+        )
+        ResponseHandler.handleSuccess(response,response.result.id)
+    }
+
+    suspend fun finishPartialStockTacking(
+        stHeaderId: Int
+    ) = callApi {
+        val response = api.finishPartialStockTacking(stHeaderId)
+        ResponseHandler.handleSuccess(response,response.success)
+    }
+
+    suspend fun nextPartialStockTackingDetail(
+        stDetailId: Int
+    ) = callApi {
+        val response = api.nextPartialStockTackingDetail(stDetailId)
+        ResponseHandler.handleSuccess(response,response.success)
+    }
+
+    suspend fun createSTActionProcessFromPartialStockTaking(
+        stHeaderId: Int,
+        stDetailId: Int,
+        productId: Int,
+        newShelfCurrentQuantity:Int
+    )= callApi {
+       val response = api.createSTActionProcessFromPartialStockTaking(
+            stHeaderId, stDetailId, productId, newShelfCurrentQuantity
+        )
+        ResponseHandler.handleSuccess(response,response.success)
+    }
 }

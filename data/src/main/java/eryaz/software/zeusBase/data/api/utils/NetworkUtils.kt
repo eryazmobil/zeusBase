@@ -7,7 +7,7 @@ import eryaz.software.zeusBase.data.BuildConfig
 
 object NetworkUtils {
 
-    private var startOfLocalHostIp = "192.168.1."
+    private var startOfLocalHostIp = "10.10.20."
 
     private fun getWifiIpAddress(context: Context): String {
         val wifiManager =

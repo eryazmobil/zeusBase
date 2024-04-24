@@ -26,7 +26,7 @@ inline fun <T : Any> Resource<T>.onError(action: (message: String?, statusEnum: 
 
 fun <T> Resource<T>.asUiState(checkEmptyList: Boolean = false): UiState {
     return when (this) {
-        is Resource.Success -> if (checkEmptyList && this.data is List<*> && (this.data as List<*>).isNullOrEmpty()) UiState.EMPTY else UiState.SUCCESS
+        is Resource.Success -> if (checkEmptyList && this.data is List<*> && (this.data as List<*>).isEmpty()) UiState.EMPTY else UiState.SUCCESS
         is Resource.Error -> UiState.ERROR
     }
 }

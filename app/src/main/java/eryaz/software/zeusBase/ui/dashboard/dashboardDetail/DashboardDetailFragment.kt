@@ -157,6 +157,12 @@ class DashboardDetailFragment : BaseFragment() {
                     )
                 }
 
+                DashboardDetailPermissionType.PARTIALWAREHOUSECOUNTING -> {
+                    findNavController().navigate(
+                        DashboardDetailFragmentDirections.actionDashboardDetailFragmentToPartialCountingFragment()
+                    )
+                }
+
                 DashboardDetailPermissionType.PRODUCTQUERY -> {
                     findNavController().navigate(
                         DashboardDetailFragmentDirections.actionDashboardDetailFragmentToNavQueryProduct()

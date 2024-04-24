@@ -31,6 +31,7 @@ enum class DashboardDetailPermissionType(val permission: String) {
     //SAYIM
     FIRSTWAREHOUSECOUNTING("Pages.PDA.StockTaking.CountingModule"),
     FASTWAREHOUSECOUNTING("Pages.PDA.StockTaking.CountingModule"),
+    PARTIALWAREHOUSECOUNTING("Pages.PDA.StockTaking.CountingModule"),
 
     //SORGU
     PRODUCTQUERY("Pages.PDA.Query.ProductQuery"),

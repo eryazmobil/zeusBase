@@ -17,6 +17,7 @@ import eryaz.software.zeusBase.ui.dashboard.counting.fastCounting.fastCountingDe
 import eryaz.software.zeusBase.ui.dashboard.counting.firstCounting.FirstCountingListVM
 import eryaz.software.zeusBase.ui.dashboard.counting.firstCounting.firstCountingDetail.FirstCountingDetailVM
 import eryaz.software.zeusBase.ui.dashboard.counting.firstCounting.firstCountingDetail.countingInfo.InfoFirstCountingVM
+import eryaz.software.zeusBase.ui.dashboard.counting.partialcounting.PartialCountingVM
 import eryaz.software.zeusBase.ui.dashboard.dashboardDetail.DashboardDetailViewModel
 import eryaz.software.zeusBase.ui.dashboard.inbound.acceptance.AcceptanceListVM
 import eryaz.software.zeusBase.ui.dashboard.inbound.acceptance.acceptanceProcess.AcceptanceProcessVM
@@ -171,6 +172,12 @@ val appModule = module {
     viewModel { (stHeaderId: Int) ->
         FirstCountingDetailVM(
             workActivityRepo = get(), countingRepo = get(), stHeaderId = stHeaderId
+        )
+    }
+
+    viewModel{
+        PartialCountingVM(
+            countingRepo = get(), workActivityRepo = get()
         )
     }
 

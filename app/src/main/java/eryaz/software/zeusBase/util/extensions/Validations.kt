@@ -22,7 +22,7 @@ fun String?.isValidPassword(): Boolean {
 }
 
 fun String?.isValidUserId(): Boolean {
-    return (this?.length ?: 0) >= 3
+    return (this?.length ?: 0) >= 2
 }
 
 fun String?.isValidFinCode(): Boolean {

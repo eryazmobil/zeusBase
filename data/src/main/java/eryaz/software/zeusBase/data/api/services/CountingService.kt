@@ -4,6 +4,7 @@ import eryaz.software.zeusBase.data.models.dto.StockTakingDetailDto
 import eryaz.software.zeusBase.data.models.remote.models.ResultModel
 import eryaz.software.zeusBase.data.models.remote.request.FastCountingProcessRequestModel
 import eryaz.software.zeusBase.data.models.remote.response.BaseResponse
+import eryaz.software.zeusBase.data.models.remote.response.IdResponse
 import eryaz.software.zeusBase.data.models.remote.response.ProductShelfQuantityResponse
 import eryaz.software.zeusBase.data.models.remote.response.StockTackingProcessResponse
 import eryaz.software.zeusBase.data.models.remote.response.StockTakingDetailResponse
@@ -103,5 +104,35 @@ interface CountingService {
     suspend fun finishFastStocktakingDetail(
         @Body fastCountingProcessRequest: FastCountingProcessRequestModel
     ): BaseResponse
+
+    @GET("api/services/app/StockTaking/GetPdaPartialStockTakingWorkActivityAndSTHeader")
+    suspend fun getPdaPartialStockTakingWorkActivityAndSTHeader(
+        @Query("companyId") companyId : Int ,
+        @Query("warehouseId") warehouseId :Int ) : ResultModel<IdResponse>
+
+    @POST("api/services/app/StockTaking/CreateSTDetailWithUserAndShelvesPartial")
+    suspend fun createSTDetailWithUserAndShelvesPartial(
+        @Query("stHeaderId") stHeaderId : Int,
+        @Query("assignedUserId") assignedUserId : Int,
+        @Query("shelfId") shelfId : Int
+    ) :  ResultModel<IdResponse>
+
+    @POST("api/services/app/StockTaking/FinishPartialStockTacking")
+    suspend fun finishPartialStockTacking(
+        @Query("stHeaderId") stHeaderId:Int
+    ) : BaseResponse
+
+    @POST("api/services/app/StockTaking/NextPartialStockTackingDetail")
+    suspend fun nextPartialStockTackingDetail(
+        @Query("stDetailId") stDetailId:Int
+    ) : BaseResponse
+
+    @POST("api/services/app/StockTaking/CreateSTActionProcessFromPartialStockTaking")
+    suspend fun createSTActionProcessFromPartialStockTaking(
+        @Query("stHeaderId") stHeaderId:Int,
+        @Query("stDetailId") stDetailId:Int,
+        @Query("ProductId") productId:Int,
+        @Query("newShelfCurrentQuantity") newShelfCurrentQuantity:Int,
+    ) : BaseResponse
 
 }

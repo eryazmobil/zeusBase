@@ -121,6 +121,9 @@
         <action
             android:id="@+id/action_dashboardDetailFragment_to_nav_dat_control"
             app:destination="@id/nav_dat_control" />
+        <action
+            android:id="@+id/action_dashboardDetailFragment_to_partialCountingFragment"
+            app:destination="@id/partialCountingFragment" />
     </fragment>
 
     <fragment
@@ -147,5 +150,9 @@
         android:name="eryaz.software.zeusBase.ui.dashboard.query.queryShelf.QueryShelfFragment"
         android:label="QueryShelfFragment"
         tools:layout="@layout/fragment_query_shelf" />
+    <fragment
+        android:id="@+id/partialCountingFragment"
+        android:name="eryaz.software.zeusBase.ui.dashboard.counting.partialcounting.PartialCountingFragment"
+        android:label="PartialCountingFragment" />
 
 </navigation>
