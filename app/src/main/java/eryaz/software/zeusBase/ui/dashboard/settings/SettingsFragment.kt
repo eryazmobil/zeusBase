@@ -1,6 +1,7 @@
 package eryaz.software.zeusBase.ui.dashboard.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import eryaz.software.zeusBase.data.models.dto.CompanyDto
 import eryaz.software.zeusBase.data.models.dto.WarehouseDto
 import eryaz.software.zeusBase.databinding.FragmentSettingsBinding
 import eryaz.software.zeusBase.ui.base.BaseFragment
+import eryaz.software.zeusBase.ui.dashboard.settings.changeLanguage.LanguageFragment
 import eryaz.software.zeusBase.ui.dashboard.settings.companies.CompanyListDialog
 import eryaz.software.zeusBase.ui.dashboard.settings.warehouses.WarehouseListDialog
 import eryaz.software.zeusBase.util.bindingAdapter.setOnSingleClickListener
@@ -44,7 +46,7 @@ class SettingsFragment : BaseFragment() {
                 viewModel.checkCompany.observe(this) {
                     if (!it) {
                         findNavController().navigate(
-                           SettingsFragmentDirections.actionSettingsFragmentToCompanyListDialog(
+                            SettingsFragmentDirections.actionSettingsFragmentToCompanyListDialog(
                                 companyList.toTypedArray()
                             )
                         )
@@ -53,12 +55,16 @@ class SettingsFragment : BaseFragment() {
             }
         }
 
+        binding.appLanguage.setOnSingleClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageFragment())
+        }
+
         viewModel.warehouseList.observe(this) { warehouseList ->
             binding.warehouseItem.setOnSingleClickListener {
                 viewModel.checkWarehouse.observe(this) {
                     if (!it) {
                         findNavController().navigate(
-                           SettingsFragmentDirections.actionSettingsFragmentToWarehouseListDialog(
+                            SettingsFragmentDirections.actionSettingsFragmentToWarehouseListDialog(
                                 warehouseList.toTypedArray()
                             )
                         )
@@ -69,13 +75,9 @@ class SettingsFragment : BaseFragment() {
 
         binding.changePassword.setOnSingleClickListener {
             findNavController().navigate(
-               SettingsFragmentDirections.actionSettingFragmentToPasswordDialog()
+                SettingsFragmentDirections.actionSettingFragmentToPasswordDialog()
             )
         }
-
-        //TODO write this when you change app language
-        //SessionManager.language = Language.TR // your language
-        //activity?.recreate()
     }
 
     override fun subscribeToObservables() {
@@ -94,5 +96,11 @@ class SettingsFragment : BaseFragment() {
             }
         }
 
+        setFragmentResultListener(LanguageFragment.LANGUAGE_FRAGMENT_TAG) { _, bundle ->
+            bundle.getString(LanguageFragment.LANGUAGE_FRAGMENT_KEY)?.let {
+                Log.d("TAG", "language: $it")
+                viewModel.setLanguage(it)
+            }
+        }
     }
 }

@@ -116,6 +116,5 @@ class PartialCountingFragment : BaseFragment() {
     private fun backToPage() {
         findNavController().navigateUp()
     }
-
 }
 

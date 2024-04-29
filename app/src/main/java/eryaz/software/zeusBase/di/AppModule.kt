@@ -61,6 +61,7 @@ import eryaz.software.zeusBase.ui.dashboard.recording.createVerifyShelf.VarietyS
 import eryaz.software.zeusBase.ui.dashboard.recording.dialog.ProductListDialogVM
 import eryaz.software.zeusBase.ui.dashboard.recording.recordBarcode.RecordBarcodeVM
 import eryaz.software.zeusBase.ui.dashboard.settings.SettingsViewModel
+import eryaz.software.zeusBase.ui.dashboard.settings.changeLanguage.LanguageVM
 import eryaz.software.zeusBase.ui.dashboard.settings.changePassword.ChangePasswordVM
 import eryaz.software.zeusBase.ui.dashboard.settings.companies.CompanyListVM
 import eryaz.software.zeusBase.ui.dashboard.settings.warehouses.WarehouseListVM
@@ -175,7 +176,7 @@ val appModule = module {
         )
     }
 
-    viewModel{
+    viewModel {
         PartialCountingVM(
             countingRepo = get(), workActivityRepo = get()
         )
@@ -304,4 +305,6 @@ val appModule = module {
     viewModel { (shippingRouteId: Int, orderHeaderId: Int) ->
         OrderDetailViewPagerVM(shippingRouteId = shippingRouteId, orderHeaderId = orderHeaderId)
     }
+
+    viewModel { LanguageVM() }
 }

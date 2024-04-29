@@ -4,6 +4,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import eryaz.software.zeusBase.data.api.utils.asUiState
 import eryaz.software.zeusBase.data.api.utils.onSuccess
+import eryaz.software.zeusBase.data.enums.LanguageType
 import eryaz.software.zeusBase.data.enums.UiState
 import eryaz.software.zeusBase.data.models.dto.CompanyDto
 import eryaz.software.zeusBase.data.models.dto.CurrentUserDto
@@ -39,11 +40,13 @@ class SettingsViewModel(private val repo: UserRepo) : BaseViewModel() {
     private val _companyName = MutableStateFlow("")
     val companyName = _companyName.asStateFlow()
 
+    private val _currentLanguage = MutableStateFlow("")
+    val currentLanguage = _currentLanguage.asStateFlow()
+
     init {
         fetchData()
         fetchWarehouseList()
         fetchCompanyList()
-
     }
 
     fun fetchData() {
@@ -74,7 +77,6 @@ class SettingsViewModel(private val repo: UserRepo) : BaseViewModel() {
         viewModelScope.launch {
             _companyName.emit(dto.code)
         }
-
     }
 
     fun setWarehouse(dto: WarehouseDto) {
@@ -147,6 +149,12 @@ class SettingsViewModel(private val repo: UserRepo) : BaseViewModel() {
                     _companyName.emit(it.code)
                 }
             }
+        }
+    }
+
+    fun setLanguage(lang: String) {
+        viewModelScope.launch {
+            _currentLanguage.emit(LanguageType.find(lang).fullName)
         }
     }
 }

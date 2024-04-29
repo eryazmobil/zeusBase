@@ -6,6 +6,7 @@ import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import eryaz.software.zeusBase.data.enums.Language
+import eryaz.software.zeusBase.data.enums.LanguageType
 
 object SessionManager {
     private const val KEY_TOKEN = "token"
@@ -66,7 +67,7 @@ object SessionManager {
         }
 
     var language
-        get() = Language.find(sharedPref.getString(KEY_LANGUAGE, Language.TR.name))
+        get() = LanguageType.find(sharedPref.getString(KEY_LANGUAGE, Language.TR.name))
         set(value) {
             sharedPref.edit { putString(KEY_LANGUAGE, value.name) }
         }

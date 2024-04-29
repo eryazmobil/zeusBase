@@ -31,6 +31,9 @@
                 app:argType="eryaz.software.zeusBase.data.models.dto.WarehouseDto[]" />
 
         </action>
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
 
     <dialog
@@ -59,4 +62,11 @@
             android:name="warehouseList"
             app:argType="eryaz.software.zeusBase.data.models.dto.WarehouseDto[]" />
     </dialog>
+
+    <dialog
+        android:id="@+id/languageFragment"
+        android:name="eryaz.software.zeusBase.ui.dashboard.settings.changeLanguage.LanguageFragment"
+        android:label="@string/empty_label"
+        tools:layout="@layout/fragment_language"
+        />
 </navigation>
