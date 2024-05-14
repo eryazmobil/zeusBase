@@ -3,6 +3,7 @@ package eryaz.software.zeusBase.data.repositories
 import eryaz.software.zeusBase.data.api.services.WorkActivityService
 import eryaz.software.zeusBase.data.api.utils.ResponseHandler
 import eryaz.software.zeusBase.data.mappers.toDto
+import eryaz.software.zeusBase.data.models.dto.ProductShelfWorkActivityDto
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfInsertRequest
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfUpdateRequest
 
@@ -40,6 +41,11 @@ class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
         ResponseHandler.handleSuccess(response, response.success)
     }
 
+    suspend fun finishWorkActivity(activityId: Int) = callApi {
+        val response = api.finishWorkActivity(activityId)
+        ResponseHandler.handleSuccess(response, response.success)
+    }
+
     suspend fun getBarcodeByCode(code: String, companyId: Int) = callApi {
         val response = api.getBarcodeByCode(code, companyId)
         ResponseHandler.handleSuccess(response, response.result.toDto())
@@ -50,6 +56,11 @@ class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
             code = code, warehouseId = warehouseId, storageId = storageId
         )
         ResponseHandler.handleSuccess(response, response.result.toDto())
+    }
+
+    suspend fun getShelfTypeByShelfId(shelfId: Int) = callApi {
+        val response = api.getShelfTypeByShelfId(shelfId)
+        ResponseHandler.handleSuccess(response,response.result.toDto())
     }
 
     suspend fun getShelfByCodeForStocktaking(
@@ -423,4 +434,81 @@ class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
 
         ResponseHandler.handleSuccess(response, response)
     }
+
+    suspend fun getUnfinishedReplenishmentWorkActivityListForPda(
+    ) = callApi {
+        val response = api.getUnfinishedReplenishmentWorkActivityListForPda()
+
+        ResponseHandler.handleSuccess(response, response.result.map { it.toDto() })
+    }
+
+    suspend fun getWorkActivityDetailToCollectProductForReplenishmentForPda(
+        workActivityId: Int
+    ) = callApi {
+        val response = api.getWorkActivityDetailToCollectProductForReplenishmentForPda(
+            workActivityId
+        )
+        ResponseHandler.handleSuccess(response, response.result.map { it.toDto() })
+    }
+
+    suspend fun createShelfMovementForReplenishment(
+        workActivityId: Int,
+        productId: Int,
+        shelfIdDto:Int,
+        shelfIdFrom:Int,
+        quantity: Int
+    )
+    = callApi {
+        val response = api.createShelfMovementForReplenishment(
+            workActivityId =workActivityId,
+            productId = productId,
+            shelfIdTo = shelfIdDto,
+            shelfIdFrom = shelfIdFrom,
+            quantity = quantity
+        )
+        ResponseHandler.handleSuccess(response,response.success)
+    }
+
+    suspend fun getProductShelfQuantityListForProductShelfSupplyForPda(
+        productId: Int,
+        companyId: Int,
+        warehouseId: Int,
+        storageId: Int
+    )
+    = callApi {
+        val response = api.getProductShelfQuantityListForProductShelfSupplyForPda(
+            productId,
+            companyId,
+            warehouseId,
+            storageId
+        )
+        ResponseHandler.handleSuccess(response,response.result.map { it.toDto() })
+    }
+
+    suspend fun getReportProductShelfListForWorkActivityForPda(
+        typeId : Int,
+        companyId: Int,
+        warehouseId: Int
+    )
+    = callApi {
+        val response = api.getReportProductShelfListForWorkActivityForPda(
+            typeId,
+            companyId,
+            warehouseId
+        )
+        ResponseHandler.handleSuccess(response,response.result.map { it.toDto() })
+    }
+
+    suspend fun createProductShelfWorkActivityForPda(
+        typeId: Int,
+        productShelfWorkActivityDto: ProductShelfWorkActivityDto
+    )
+    = callApi {
+        val response = api.createProductShelfWorkActivityForPda(
+            typeId = typeId,
+            productShelfWorkActivityDto = productShelfWorkActivityDto
+        )
+        ResponseHandler.handleSuccess(response,response.success)
+    }
+
 }

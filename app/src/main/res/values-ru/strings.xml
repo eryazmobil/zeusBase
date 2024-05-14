@@ -19,6 +19,7 @@
     <string name="tried_to_add_more_than_quantity">Вы пытались добавить больше, чем количество</string>
     <string name="there_is_a_error">Произошла ошибка. Пожалуйста, свяжитесь с компетентным подразделением</string>
     <string name="not_done_yet">Еще не сделано!</string>
+    <string name="max_qty_to_collect">Максимальное количество для сбора</string>
     <string name="control_dat_content">Контроль содержимого DAT</string>
     <string name="grand_total_dat">DAT ИТОГО</string>
     <string name="no_permission_to_enter_menu">У вас нет разрешения на вход в это меню</string>

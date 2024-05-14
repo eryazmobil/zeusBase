@@ -10,7 +10,7 @@ data class ProductShelfQuantityResponse(
     val product: ProductResponse,
 
     @SerializedName("company")
-    val company: CompanyResponse,
+    val company: CompanyResponse?,
 
     @SerializedName("warehouse")
     val warehouse: WarehouseResponse,

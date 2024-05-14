@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import eryaz.software.zeusBase.data.models.dto.ProductStorageQuantityDto
 
 class StorageProductQuantityAdapter :
-    ListAdapter<ProductStorageQuantityDto, RecyclerView.ViewHolder>(DiffCallBacks) {
+    ListAdapter<ProductStorageQuantityDto, RecyclerView.ViewHolder>(DiffCallBacksProduct) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return StorageProductQuantityVH.from(parent)
@@ -25,7 +25,7 @@ class StorageProductQuantityAdapter :
     }
 }
 
-object DiffCallBacks : DiffUtil.ItemCallback<ProductStorageQuantityDto>() {
+object DiffCallBacksProduct : DiffUtil.ItemCallback<ProductStorageQuantityDto>() {
     override fun areItemsTheSame(
         oldItem: ProductStorageQuantityDto,
         newItem: ProductStorageQuantityDto

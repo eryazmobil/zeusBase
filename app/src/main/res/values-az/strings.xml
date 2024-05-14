@@ -19,6 +19,7 @@
     <string name="tried_to_add_more_than_quantity">Ədəd sayından çox əlavə etməyə çalışdınız</string>
     <string name="there_is_a_error">Xəta baş verdi. Səlahiyyətli bölmə ilə əlaqə saxlayın</string>
     <string name="not_done_yet">Hələ tamamlanmayıb!</string>
+    <string name="max_qty_to_collect">Toplanabilir maksimum miktar</string>
     <string name="no_permission_to_enter_menu">Sizin bu menyuya daxil olmaq icazəniz yoxdur</string>
     <string name="enter_read_shelf">Rəf Kodunu oxuyun</string>
     <string name="enter_barcode">Barkodu skan edin.</string>

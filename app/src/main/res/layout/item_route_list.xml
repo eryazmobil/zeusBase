@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="dto"
             type="eryaz.software.zeusBase.data.models.dto.RouteDto" />

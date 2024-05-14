@@ -23,7 +23,7 @@ class LanguageVM : BaseViewModel() {
 
     private fun getLangList() {
         viewModelScope.launch {
-            val model = LanguageType.values().map {
+            val model = LanguageType.entries.map {
                 LanguageModel(
                     lang = it,
                     isSelected = ObservableField(it == SessionManager.language)

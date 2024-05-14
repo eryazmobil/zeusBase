@@ -4,7 +4,7 @@ enum class LanguageType(val fullName :String) {
     AZ("Azərbaycan"),
     RU("Русский"),
     EN("English"),
-    TR("Türkiye"),
+    TR("Türkçe"),
     AR("عربي");
 
     companion object {

@@ -1,16 +1,17 @@
 package eryaz.software.zeusBase.data.mappers
 
-import eryaz.software.zeusBase.data.models.dto.ControlPointDto
 import eryaz.software.zeusBase.data.models.dto.OrderPickingDto
 import eryaz.software.zeusBase.data.models.dto.PickingSuggestionDto
 import eryaz.software.zeusBase.data.models.dto.StockShelfQuantityDto
 import eryaz.software.zeusBase.data.models.dto.TransferRequestAllDetailDto
+import eryaz.software.zeusBase.data.models.dto.WorkActivityDetailDto
 import eryaz.software.zeusBase.data.models.dto.WorkActivityDto
 import eryaz.software.zeusBase.data.models.dto.WorkActivityTypeDto
 import eryaz.software.zeusBase.data.models.remote.response.OrderPickingResponse
 import eryaz.software.zeusBase.data.models.remote.response.PickingSuggestionResponse
 import eryaz.software.zeusBase.data.models.remote.response.StockShelfQuantityResponse
 import eryaz.software.zeusBase.data.models.remote.response.TransferRequestAllDetailResponse
+import eryaz.software.zeusBase.data.models.remote.response.WorkActivityDetailResponse
 import eryaz.software.zeusBase.data.models.remote.response.WorkActivityResponse
 import eryaz.software.zeusBase.data.models.remote.response.WorkActivityTypeResponse
 import eryaz.software.zeusBase.data.utils.getFormattedDate
@@ -26,7 +27,20 @@ fun WorkActivityResponse.toDto() = WorkActivityDto(
     shippingType = shippingType?.toDto(),
     notes = notes.orEmpty(),
     controlPointDefinition = controlPointDefinition.orEmpty(),
-    hasPriority = hasPriority
+    hasPriority = hasPriority,
+    replenishmentShelf = replenishmentShelf?.toDto()
+)
+
+fun WorkActivityDetailResponse.toDto() = WorkActivityDetailDto(
+    workActivity = workActivity.toDto(),
+    sourceId = sourceId,
+    product = product.toDto(),
+    quantity = quantity,
+    placedCollectQuantity = placedCollectQuantity,
+    oldShelf = oldShelf.toDto(),
+    newShelf = newShelf.toDto(),
+    placedReplenishmentQty = placedReplenishmentQty,
+    id = id
 )
 
 fun WorkActivityTypeResponse.toDto() = WorkActivityTypeDto(

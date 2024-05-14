@@ -76,7 +76,7 @@ class AcceptanceListVM(private val repo: WorkActivityRepo) : BaseViewModel() {
             repo.getWorkActionForPda(
                 userId = SessionManager.userId,
                 workActivityId = TemporaryCashManager.getInstance().workActivity?.workActivityId.orZero(),
-                actionTypeId =    TemporaryCashManager.getInstance().workActionTypeList?.find { model -> model.code == "Control" }?.id.orZero()
+                actionTypeId = TemporaryCashManager.getInstance().workActionTypeList?.find { model -> model.code == "Control" }?.id.orZero()
             ).onSuccess {
                 _workActionDto.emit(it)
                 TemporaryCashManager.getInstance().workAction = it

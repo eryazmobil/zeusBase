@@ -99,6 +99,7 @@ class SettingsViewModel(private val repo: UserRepo) : BaseViewModel() {
             _companyList.emit(it)
             checkSelectedCompany()
             checkCompanyData()
+            checkSelectedLanguage()
         }
     }
 
@@ -135,12 +136,13 @@ class SettingsViewModel(private val repo: UserRepo) : BaseViewModel() {
             _warehouseList.value.filter {
                 it.id == SessionManager.warehouseId
             }.map {
-                viewModelScope.launch{
+                viewModelScope.launch {
                     _warehouseName.emit(it.name)
                 }
             }
         }
     }
+
     private fun checkSelectedCompany() {
         if (SessionManager.companyId > 0) {
             val companyWithId = _companyList.value.find { it.id == SessionManager.companyId }
@@ -150,6 +152,13 @@ class SettingsViewModel(private val repo: UserRepo) : BaseViewModel() {
                 }
             }
         }
+    }
+
+    private fun checkSelectedLanguage() {
+        viewModelScope.launch {
+            _currentLanguage.emit(SessionManager.language.fullName)
+        }
+
     }
 
     fun setLanguage(lang: String) {

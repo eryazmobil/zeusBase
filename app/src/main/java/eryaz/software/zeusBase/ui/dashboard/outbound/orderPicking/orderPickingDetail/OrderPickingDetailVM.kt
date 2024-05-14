@@ -105,7 +105,6 @@ class OrderPickingDetailVM(
             if (it.orderDetailList.isNotEmpty()) {
                 if (it.pickingSuggestionList.isNotEmpty()) {
                     orderPickingDto = it
-
                     showNext()
                 } else {
                     parentView.emit(true)
@@ -144,7 +143,6 @@ class OrderPickingDetailVM(
                 productId = it.product.id
                 _productQuantity.emit("x " + it.quantity.toString())
                 _productDetail.emit(it.product)
-
                 checkProductOrder()
             }.onError { _, _ ->
                 _showProductDetail.emit(false)
@@ -275,7 +273,7 @@ class OrderPickingDetailVM(
         }
     }
 
-    fun finishWorkAction() {
+    private fun finishWorkAction() {
         executeInBackground(showProgressDialog = true) {
             workActivityRepo.finishWorkAction(actionId = TemporaryCashManager.getInstance().workAction?.workActionId.orZero())
                 .onSuccess {

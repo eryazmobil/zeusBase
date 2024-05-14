@@ -50,6 +50,7 @@
     <string name="location_fixing">تحديد العناوين</string>
     <string name="error_try_again">خطأ! حاول مرة اخرى\n</string>
     <string name="assortment">انشاء الرف الثابت</string>
+    <string name="max_qty_to_collect">الحد الأقصى للكمية المطلوب جمعها</string>
     <string name="product_code_variety_shelf">رمز المنتج (الرف الثابت)</string>
     <string name="update_variety_shelf">قم بتحديث الرف الثابت!</string>
     <string name="move_to_variety_shelf">نقل إلى الرف الثابت</string>
