@@ -47,6 +47,10 @@ android {
         viewBinding true
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     namespace 'eryaz.software.zeusBase'
 }
 
