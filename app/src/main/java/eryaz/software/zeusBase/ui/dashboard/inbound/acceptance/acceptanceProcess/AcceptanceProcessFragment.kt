@@ -74,7 +74,8 @@ class AcceptanceProcessFragment : BaseFragment() {
 
         viewModel.showCreateBarcode
             .asLiveData()
-            .observe(viewLifecycleOwner) {
+            .observe(this) {
+                if(it)
                 QuestionDialog(
                     onPositiveClickListener = {
                         findNavController().navigate(

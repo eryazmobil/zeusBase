@@ -146,16 +146,12 @@ class PlacementDetailVM(
         var hasDifferentValues = false
 
         waybillDetailList.value.forEach { waybillDetail ->
-
-            if (waybillDetail.quantityControlled.toInt() <= waybillDetail.quantity) {
                 productCollected = waybillDetail.quantityControlled.toInt()
                 quantityPlaced = waybillDetail.quantityPlaced
                 if (quantityPlaced != productCollected) {
                     hasDifferentValues = true
                 }
-            }
         }
-
         val allFinished = !hasDifferentValues
 
         viewModelScope.launch {
