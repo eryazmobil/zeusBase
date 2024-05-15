@@ -40,6 +40,9 @@ data class WorkActivityResponse(
     @SerializedName("controlPointDefinition")
     val controlPointDefinition: String?,
     @SerializedName("hasPriority")
-    val hasPriority: Boolean
+    val hasPriority: Boolean,
+    @SerializedName("replenishmentShelf")
+    val replenishmentShelf: ShelfResponse?
+
 )
 

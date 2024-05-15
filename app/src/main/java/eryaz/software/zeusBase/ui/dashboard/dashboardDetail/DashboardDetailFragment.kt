@@ -110,6 +110,11 @@ class DashboardDetailFragment : BaseFragment() {
                         DashboardDetailFragmentDirections.actionDashboardDetailFragmentToNavDatControl()
                     )
                 }
+                DashboardDetailPermissionType.REPLENISHMENT -> {
+                    findNavController().navigate(
+                        DashboardDetailFragmentDirections.actionDashboardDetailFragmentToNavSupply()
+                    )
+                }
 
                 DashboardDetailPermissionType.TRANSFERWAREHOUSE ->
                     findNavController().navigate(

@@ -7,6 +7,7 @@ import eryaz.software.zeusBase.R
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
 import eryaz.software.zeusBase.data.enums.ActionType
+import eryaz.software.zeusBase.data.enums.ActivityType
 import eryaz.software.zeusBase.data.models.dto.WarningDialogDto
 import eryaz.software.zeusBase.data.models.dto.WorkActivityDto
 import eryaz.software.zeusBase.data.persistence.SessionManager
@@ -47,8 +48,8 @@ class DatPickingListVM(private val repo: WorkActivityRepo) : BaseViewModel() {
             repo.getWorkActionActive(
                 companyId = SessionManager.companyId,
                 warehouseId = SessionManager.warehouseId,
-                workActivityType = WORK_ACTIVITY_TYPE_SHIPPING,
-                workActionType = WORK_ACTION_TYPE_PICKING
+                workActivityType = ActivityType.SHIPPING.type,
+                workActionType = ActionType.PICKING.type
             ).onSuccess {
                 _navigateToDetail.emit(true)
                 TemporaryCashManager.getInstance().workAction = it
@@ -88,8 +89,8 @@ class DatPickingListVM(private val repo: WorkActivityRepo) : BaseViewModel() {
         ) {
             repo.getWorkActionForPda(
                 userId = SessionManager.userId,
-                workActivityId = TemporaryCashManager.getInstance().workAction?.workActionId.orZero(),
-                actionTypeId = TemporaryCashManager.getInstance().workActionTypeList?.find { model -> model.code == "Picking" }?.id.orZero()
+                workActivityId = TemporaryCashManager.getInstance().workActivity?.workActivityId.orZero(),
+                actionTypeId = TemporaryCashManager.getInstance().workActionTypeList?.find { model -> model.code == ActionType.PICKING.type }?.id.orZero()
             ).onSuccess {
                 TemporaryCashManager.getInstance().workAction = it
                 _navigateToDetail.emit(true)
@@ -103,7 +104,7 @@ class DatPickingListVM(private val repo: WorkActivityRepo) : BaseViewModel() {
         executeInBackground(showProgressDialog = true) {
             repo.createWorkAction(
                 activityId = TemporaryCashManager.getInstance().workActivity?.workActivityId ?: 0,
-                actionTypeCode = ActionType.CONTROL.type
+                actionTypeCode = ActionType.PICKING.type
             ).onSuccess {
                 TemporaryCashManager.getInstance().workAction = it
                 _navigateToDetail.emit(true)
@@ -111,8 +112,5 @@ class DatPickingListVM(private val repo: WorkActivityRepo) : BaseViewModel() {
         }
     }
 
-    companion object {
-        const val WORK_ACTIVITY_TYPE_SHIPPING = "Shipping"
-        const val WORK_ACTION_TYPE_PICKING = "Picking"
-    }
+
 }

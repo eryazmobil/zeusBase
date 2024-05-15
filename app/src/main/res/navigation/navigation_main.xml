@@ -124,6 +124,9 @@
         <action
             android:id="@+id/action_dashboardDetailFragment_to_partialCountingFragment"
             app:destination="@id/partialCountingFragment" />
+        <action
+            android:id="@+id/action_dashboardDetailFragment_to_nav_supply"
+            app:destination="@id/nav_supply" />
     </fragment>
 
     <fragment
@@ -154,5 +157,6 @@
         android:id="@+id/partialCountingFragment"
         android:name="eryaz.software.zeusBase.ui.dashboard.counting.partialcounting.PartialCountingFragment"
         android:label="PartialCountingFragment" />
+    <include app:graph="@navigation/nav_supply" />
 
 </navigation>

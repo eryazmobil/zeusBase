@@ -12,7 +12,7 @@ data class OrderHeaderDto(
     val notes: String,
     val shippingType: ShippingTypeDto?,
     val controlPoint: ControlPointDto?,
-    val collectPoint: String,
+    val collectPoint: String?,
     val workActivity: WorkActivityDto?,
     val documentNo: String,
     val documentDate: String,

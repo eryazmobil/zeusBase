@@ -529,7 +529,8 @@
     <string name="shelf_code_new">Raf Adresi (Yeni)</string>
     <string name="shelf_code_out">Raf Adresi (Çıkış)</string>
     <string name="shelf_code_in">Raf Adresi (Giriş)</string>
-    <string name="qty">Miktar</string>
+    <string name="max_qty_to_collect">Toplanabilecek max adet</string>
+    <string name="qty">Miktar </string>
     <string name="qty_big_1">ADET</string>
     <string name="counting_list">Sayım Listesi</string>
     <string name="qty_big">MİKTAR</string>
@@ -689,5 +690,7 @@
     <string name="delivered_person">Teslim edilen adı</string>
     <string name="collected_pack">Yüklenmiş</string>
     <string name="can_not_placement">Kontrol adetinden fazla ürün yerleştiremezsiniz</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

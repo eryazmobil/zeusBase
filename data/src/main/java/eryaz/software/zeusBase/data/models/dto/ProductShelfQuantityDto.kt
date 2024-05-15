@@ -3,7 +3,7 @@ package eryaz.software.zeusBase.data.models.dto
 data class ProductShelfQuantityDto(
     val id: Int,
     val product: ProductDto,
-    val company: CompanyDto,
+    val company: CompanyDto?,
     val storage: StorageDto,
     val warehouse: WarehouseDto,
     val shelf: ShelfDto?,

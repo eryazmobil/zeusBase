@@ -15,5 +15,6 @@ data class WorkActivityDto(
     val shippingType: ShippingTypeDto?,
     val notes: String,
     val controlPointDefinition: String?,
-    val hasPriority: Boolean
-):Parcelable
+    val hasPriority: Boolean,
+    val replenishmentShelf: ShelfDto?
+) : Parcelable

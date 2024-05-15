@@ -19,7 +19,7 @@ class LanguageVH(val binding: ItemLanguageBinding) : RecyclerView.ViewHolder(bin
         binding.iconImg.setImageResource(model.lang.getDrawableRes())
 
         model.isSelected.onChanged {
-            binding.iconImg.strokeWidth = if (it == true) 2.dpToPx().toFloat() else 0f
+            binding.iconImg.strokeWidth = if (it) 2.dpToPx().toFloat() else 0f
         }
 
         binding.root.setOnClickListener {

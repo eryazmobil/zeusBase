@@ -35,6 +35,9 @@ import eryaz.software.zeusBase.ui.dashboard.movement.routeList.chooseStep.Choose
 import eryaz.software.zeusBase.ui.dashboard.movement.routeList.chooseStep.vehicleDown.VehicleDownVM
 import eryaz.software.zeusBase.ui.dashboard.movement.routeList.chooseStep.vehicleDown.orderDetailViewPager.OrderDetailViewPagerVM
 import eryaz.software.zeusBase.ui.dashboard.movement.routeList.chooseStep.vehicleDown.orderDetailViewPager.orderDetail.OrderDetailVM
+import eryaz.software.zeusBase.ui.dashboard.movement.supply.createSupplyWorkActivity.CreateSupplyWorkActivityVM
+import eryaz.software.zeusBase.ui.dashboard.movement.supply.supplyList.SupplyListVM
+import eryaz.software.zeusBase.ui.dashboard.movement.supply.supplyShelf.SupplyShelfVM
 import eryaz.software.zeusBase.ui.dashboard.movement.transferAllShelf.TransferAllShelfVM
 import eryaz.software.zeusBase.ui.dashboard.movement.transferShelf.TransferShelfVM
 import eryaz.software.zeusBase.ui.dashboard.movement.transferStockCorrection.TransferStockCorrectionVM
@@ -130,6 +133,10 @@ val appModule = module {
     //TransferAllSelf
     viewModel { TransferAllShelfVM(repo = get()) }
 
+    viewModel { SupplyShelfVM(workActivityRepo = get()) }
+
+    viewModel { CreateSupplyWorkActivityVM(workActivityRepo = get()) }
+
     //StorageList
     viewModel { StorageListDialogVM(userRepo = get()) }
 
@@ -179,6 +186,12 @@ val appModule = module {
     viewModel {
         PartialCountingVM(
             countingRepo = get(), workActivityRepo = get()
+        )
+    }
+
+    viewModel {
+        SupplyListVM(
+            workActivityRepo = get()
         )
     }
 

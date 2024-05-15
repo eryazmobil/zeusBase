@@ -1,5 +1,6 @@
 package eryaz.software.zeusBase.data.api.services
 
+import eryaz.software.zeusBase.data.models.dto.ProductShelfWorkActivityDto
 import eryaz.software.zeusBase.data.models.remote.models.ResultModel
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfInsertRequest
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfUpdateRequest
@@ -48,6 +49,11 @@ interface WorkActivityService {
         @Query("actionId") actionId: Int
     ): BaseResponse
 
+    @POST("api/services/app/Work/FinishWorkActivity")
+    suspend fun finishWorkActivity(
+        @Query("activityId") activityId: Int
+    ): BaseResponse
+
     @GET("api/services/app/Product/GetBarcodeByCode")
     suspend fun getBarcodeByCode(
         @Query("code") code: String,
@@ -60,6 +66,11 @@ interface WorkActivityService {
         @Query("warehouseId") warehouseId: Int,
         @Query("storageId") storageId: Int
     ): ResultModel<ShelfResponse>
+
+    @GET("api/services/app/Warehouse/GetShelfTypeByShelfId")
+    suspend fun getShelfTypeByShelfId(
+        @Query("shelfId") shelfId: Int
+    ): ResultModel<ShelfTypeForSupplyResponse>
 
     @GET("api/services/app/Product/GetShelfByCodeForStocktaking")
     suspend fun getShelfByCodeForStocktaking(
@@ -122,6 +133,14 @@ interface WorkActivityService {
         @Query("includeOld") includeOld: Boolean,
         @Query("actionId") actionId: Int
     ): ResultModel<List<ShelfResponse>>
+
+    @GET("api/services/app/Product/GetProductShelfQuantityListForProductShelfIkmalForPda")
+    suspend fun getProductShelfQuantityListForProductShelfSupplyForPda(
+        @Query("ProductId") productId: Int,
+        @Query("CompanyId") companyId: Int,
+        @Query("WarehouseId") warehouseId: Int,
+        @Query("StorageId") storageId: Int
+    ): ResultModel<List<ProductShelfSupplyResponse>>
 
     @GET("api/services/app/Waybill/GetWaybillDetailQuantityWaitingForPlacement")
     suspend fun getWaybillDetailQuantityWaitingForPlacement(
@@ -267,4 +286,33 @@ interface WorkActivityService {
         @Query("productId") productId: Int
     ): BaseResponse
 
+    @GET("/api/services/app/Work/GetUnfinishedReplenishmentWorkActivityListForPda")
+    suspend fun getUnfinishedReplenishmentWorkActivityListForPda(): ResultModel<List<WorkActivityResponse>>
+
+    @GET("/api/services/app/Work/GetWorkActivityDetailToCollectProductForReplenishmentForPda")
+    suspend fun getWorkActivityDetailToCollectProductForReplenishmentForPda(
+        @Query("activityId") activityId: Int
+    ): ResultModel<List<WorkActivityDetailResponse>>
+
+    @POST("api/services/app/Work/CreateShelfMovementForReplenishment")
+    suspend fun createShelfMovementForReplenishment(
+        @Query("workActivityId") workActivityId: Int,
+        @Query("productId") productId: Int,
+        @Query("shelfIdTo") shelfIdTo: Int,
+        @Query("shelfIdFrom") shelfIdFrom: Int,
+        @Query("quantity") quantity: Int,
+    ): BaseResponse
+
+    @GET("api/services/app/Product/GetReportProductShelfListForWorkActivityForPda")
+    suspend fun getReportProductShelfListForWorkActivityForPda(
+        @Query("typeId") typeId: Int,
+        @Query("companyId") companyId: Int,
+        @Query("warehouseId") warehouseId: Int
+    ): ResultModel<List<SupplyProductShelfDapperResponse>>
+
+    @POST("api/services/app/Work/CreateProductShelfWorkActivityForPda")
+    suspend fun createProductShelfWorkActivityForPda(
+        @Query("typeId") typeId: Int,
+        @Body productShelfWorkActivityDto: ProductShelfWorkActivityDto
+    ): BaseResponse
 }

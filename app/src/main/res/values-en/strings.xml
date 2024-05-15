@@ -19,6 +19,7 @@
     <string name="not_done_yet">Not done yet!</string>
     <string name="no_permission_to_enter_menu">You are not authorized to enter this menu</string>
     <string name="enter_read_shelf">Scan the shelf code</string>
+    <string name="max_qty_to_collect">Maximum Quantity to Collect</string>
     <string name="enter_barcode">Please scan the barcode.</string>
     <string name="enter_shelf_">Please scan the shelf!</string>
     <string name="enter_product_">Please scan the product!</string>
