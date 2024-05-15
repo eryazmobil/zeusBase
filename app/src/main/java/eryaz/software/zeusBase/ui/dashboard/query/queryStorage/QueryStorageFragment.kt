@@ -12,6 +12,7 @@ import eryaz.software.zeusBase.data.models.dto.ProductDto
 import eryaz.software.zeusBase.databinding.FragmentQueryStorageBinding
 import eryaz.software.zeusBase.ui.base.BaseFragment
 import eryaz.software.zeusBase.ui.dashboard.query.adapter.ShelfProductQuantityAdapter
+import eryaz.software.zeusBase.ui.dashboard.query.adapter.ShelfQuantityAdapter
 import eryaz.software.zeusBase.ui.dashboard.query.adapter.StorageProductQuantityAdapter
 import eryaz.software.zeusBase.ui.dashboard.recording.dialog.ProductListDialogFragment
 import eryaz.software.zeusBase.util.extensions.hideSoftKeyboard
@@ -84,7 +85,7 @@ class QueryStorageFragment : BaseFragment() {
     }
 
     private val shelfAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        ShelfProductQuantityAdapter().also {
+        ShelfQuantityAdapter().also {
             binding.recyclerViewForShelf.adapter = it
         }
     }
