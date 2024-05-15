@@ -54,6 +54,7 @@
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/logoGray"
                     android:textSize="18sp"
+                    android:text="@={viewModel.search}"
                     app:fontFamily="@font/sogeoui" />
             </eryaz.software.zeusBase.util.widgets.TextInputLayout>
 

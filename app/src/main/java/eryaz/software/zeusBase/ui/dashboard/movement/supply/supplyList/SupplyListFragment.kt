@@ -41,6 +41,11 @@ class SupplyListFragment : BaseFragment() {
             adapter.submitList(it)
         }
 
+        viewModel.searchList()
+            .observe(viewLifecycleOwner) {
+                adapter.submitList(it)
+            }
+
         viewModel.navigateToDetail
             .asLiveData()
             .observe(viewLifecycleOwner) {

@@ -2,6 +2,7 @@ package eryaz.software.zeusBase.ui.dashboard.movement.supply.supplyList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.switchMap
 import eryaz.software.zeusBase.R
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
@@ -27,8 +28,25 @@ class SupplyListVM(
     private val _supplyWorkActivityList = MutableLiveData<List<WorkActivityDto?>>(emptyList())
     val supplyWorkActivityList: LiveData<List<WorkActivityDto?>> = _supplyWorkActivityList
 
+    val search = MutableLiveData("")
 
-     fun getActiveWorkAction() =
+
+    fun searchList() = search.switchMap { query ->
+        MutableLiveData<List<WorkActivityDto?>>().apply {
+            value = filterData(query)
+        }
+    }
+
+    private fun filterData(query: String): List<WorkActivityDto?> {
+        val dataList = _supplyWorkActivityList.value.orEmpty()
+
+        val filteredList = dataList.filter { data ->
+            data?.workActivityCode?.contains(query, ignoreCase = true) ?: true
+        }
+        return filteredList
+    }
+
+    fun getActiveWorkAction() =
         executeInBackground(
             showErrorDialog = false,
             showProgressDialog = false
