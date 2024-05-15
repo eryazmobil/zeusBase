@@ -8,5 +8,5 @@ data class PickingSuggestionDto(
     val quantityWillBePicked: Int,
     var quantityPicked: Int,
     val controlPoint: ControlPointDto?,
-    val collectPoint: String
+    val collectPoint: String?
 )
