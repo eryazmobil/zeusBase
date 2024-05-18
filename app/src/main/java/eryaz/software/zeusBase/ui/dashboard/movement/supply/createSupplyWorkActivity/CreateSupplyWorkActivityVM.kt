@@ -15,11 +15,8 @@ class CreateSupplyWorkActivityVM(
     private val workActivityRepo: WorkActivityRepo
 ) : BaseViewModel() {
 
-     val supplyProductShelfDapperDtoList =
-        MutableLiveData<List<SupplyProductShelfDapperDto>>(
-            emptyList()
-        )
-
+    val supplyProductShelfDapperDtoList =
+        MutableLiveData<List<SupplyProductShelfDapperDto>>(emptyList())
     val finishThePage = MutableStateFlow(false)
 
     fun getReportProductShelfListForWorkActivityForPda(typeId: Int) {
@@ -36,12 +33,12 @@ class CreateSupplyWorkActivityVM(
 
     fun createProductShelfWorkActivityForPda(
         typeId: Int,
-        productShelfIdList : List<Int?>?
-    ){
+        productShelfIdList: List<Int?>?
+    ) {
         executeInBackground(
             showProgressDialog = true,
             showErrorDialog = true
-        ){
+        ) {
             val productShelfWorkActivityDto = ProductShelfWorkActivityDto(
                 productShelfIdList = productShelfIdList
             )
