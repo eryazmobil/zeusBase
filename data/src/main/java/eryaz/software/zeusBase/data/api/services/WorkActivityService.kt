@@ -127,7 +127,7 @@ interface WorkActivityService {
         @Query("warehouseId") warehouseId: Int
     ): ResultModel<CrossDockCheckResponse>
 
-    @GET("api/services/app/Product/GetShelfListForPlacementForPda")
+    @GET("api/services/app/Product/GetShelfListForPlacement")
     suspend fun getShelfListForPlacement(
         @Query("productId") productId: Int,
         @Query("includeOld") includeOld: Boolean,
