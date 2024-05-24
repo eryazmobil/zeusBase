@@ -28,6 +28,17 @@ class LoginFragment : BaseFragment() {
         return binding.root
     }
 
+    // this is for redirecting after notification but not necessary yet
+//    override fun onResume() {
+//        super.onResume()
+//        val intent = requireActivity().intent
+//        if (intent != null && intent.hasExtra("key")) {
+//            findNavController().navigate(
+//                LoginFragmentDirections.actionLoginFragmentToMainFragment()
+//            )
+//        }
+//    }
+
     override fun subscribeToObservables() {
         binding.edtUserName.requestFocus()
 

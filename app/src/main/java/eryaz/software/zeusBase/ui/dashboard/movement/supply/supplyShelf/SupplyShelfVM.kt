@@ -63,9 +63,6 @@ class SupplyShelfVM(
     private val _productDetail = MutableStateFlow<ProductDto?>(null)
     val productDetail = _productDetail.asStateFlow()
 
-    private val _nextOrder = MutableStateFlow(false)
-    val nextOrder = _nextOrder.asStateFlow()
-
     private val _finishWorkAction = MutableStateFlow(false)
     val finishWorkAction = _finishWorkAction.asStateFlow()
 

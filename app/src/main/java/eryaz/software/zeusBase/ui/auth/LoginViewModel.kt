@@ -1,5 +1,8 @@
 package eryaz.software.zeusBase.ui.auth
 
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import eryaz.software.zeusBase.R
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
@@ -17,6 +20,7 @@ import eryaz.software.zeusBase.util.extensions.isValidUserId
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val authRepo: AuthRepo,
@@ -24,6 +28,7 @@ class LoginViewModel(
 ) : BaseViewModel() {
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
+    private val fireBaseToken = MutableStateFlow("")
 
     private val _navigateToMain = MutableSharedFlow<Boolean>()
     val navigateToMain = _navigateToMain.asSharedFlow()
@@ -34,6 +39,7 @@ class LoginViewModel(
 
     init {
         _uiState.value = UiState.EMPTY
+        getFirebaseToken()
     }
 
     fun login() = executeInBackground(_uiState, hasNextRequest = true) {
@@ -61,6 +67,19 @@ class LoginViewModel(
             TemporaryCashManager.getInstance().workActionTypeList = it
             _navigateToMain.emit(true)
         }
+    }
+
+    private fun getFirebaseToken(){
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            viewModelScope.launch {
+                fireBaseToken.emit(task.result)
+                println(fireBaseToken.value)
+            }
+        })
     }
 }
 

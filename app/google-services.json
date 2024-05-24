@@ -1,32 +1,13 @@
 {
   "project_info": {
-    "project_number": "177745001742",
-    "project_id": "zeus-c2727",
-    "storage_bucket": "zeus-c2727.appspot.com"
+    "project_number": "829788800314",
+    "project_id": "base-v3-53aba",
+    "storage_bucket": "base-v3-53aba.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:177745001742:android:93605bbeb4d9d46ecbab5f",
-        "android_client_info": {
-          "package_name": "eryaz.software.doganoto"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBMN5IjIOQvAkqLXhn3HqNHMqYdrGR4f90"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:177745001742:android:8f332fa51c9546f9cbab5f",
+        "mobilesdk_app_id": "1:829788800314:android:8a758fe091d22054d77c03",
         "android_client_info": {
           "package_name": "eryaz.software.zeusBase"
         }
@@ -34,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBMN5IjIOQvAkqLXhn3HqNHMqYdrGR4f90"
+          "current_key": "AIzaSyDKSdYjBGwhVk64jBXhGXll6UaeFqlRbsw"
         }
       ],
       "services": {

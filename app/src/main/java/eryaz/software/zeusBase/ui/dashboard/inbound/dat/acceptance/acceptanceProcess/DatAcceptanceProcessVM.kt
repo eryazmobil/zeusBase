@@ -58,7 +58,7 @@ class DatAcceptanceProcessVM(
         TemporaryCashManager.getInstance().workActivity?.let {
 
             viewModelScope.launch {
-                _clientName.emit(it.client!!.name)
+                it.client?.let { it1 -> _clientName.emit(it1.name) }
                 _orderDate.emit(it.creationTime)
                 _productCode.emit(it.workActivityCode)
             }
