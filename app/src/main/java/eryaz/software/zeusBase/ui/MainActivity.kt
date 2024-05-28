@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         keyboardListener()
         requestNotificationPermission()
-       // NotificationHelper.createNotificationChannel(this)
+        NotificationHelper.createNotificationChannel(this)
     }
 
     private fun keyboardListener() {

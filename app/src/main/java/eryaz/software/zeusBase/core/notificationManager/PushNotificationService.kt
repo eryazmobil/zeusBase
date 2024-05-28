@@ -29,23 +29,23 @@ class PushNotificationService  : FirebaseMessagingService() {
     }
 
     private fun showNotification(title: String?, body: String?) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, OrderPickingListFragment::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        //intent.putExtra("key", "value");
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
         val notificationBuilder: NotificationCompat.Builder =
             NotificationCompat.Builder(this, NotificationHelper.CHANNEL_ID)
-                .setSmallIcon(R.drawable.zeus_logo) // Set custom icon
+                .setSmallIcon(R.drawable.ic_notification_zeus_logo) // Set custom icon
                 .setLargeIcon(
                     BitmapFactory.decodeResource(
                         resources,
                         R.drawable.zeus_logo
                     )
-                ) // Set large icon
+                )
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setColor(Color.TRANSPARENT) // Set custom color
+                .setColor(getColor(R.color.ic_launcher_background)) // Set custom color
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)) // Set custom sound
                 .setContentIntent(pendingIntent)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
