@@ -385,11 +385,7 @@ class OrderPickingDetailVM(
                 _selectedSuggestion.emit(it)
                 productId = it.product.id
             } ?: run {
-                selectedSuggestionIndex - 2
-                orderPickingDto?.pickingSuggestionList?.getOrNull(selectedSuggestionIndex)?.let {
-                    _selectedSuggestion.emit(it)
-                    productId = it.product.id
-                }
+                selectedSuggestionIndex--
             }
 
             _orderQuantityTxt.emit(
