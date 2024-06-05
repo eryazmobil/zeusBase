@@ -99,6 +99,10 @@ class FirstCountingDetailFragment : BaseFragment() {
                 )
             )
         }
+
+        binding.saveBtn.setOnSingleClickListener {
+            viewModel.saveBtn()
+        }
     }
 
     override fun subscribeToObservables() {
