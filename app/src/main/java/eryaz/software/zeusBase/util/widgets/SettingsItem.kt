@@ -26,7 +26,7 @@ class SettingsItem(context: Context?, attrs: AttributeSet?) :
         }
     }
 
-    fun setTitle(title: String?) {
+    private fun setTitle(title: String?) {
         binding.titleTxt.text = title
     }
 

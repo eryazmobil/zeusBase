@@ -45,10 +45,12 @@
             android:text="@{dto.editedShelfCurrentQuantity.toString()}"
             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp"
+            android:imeOptions="actionDone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/productCodeTxt"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="23" />
+            tools:text="23"
+            android:inputType="number" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/makeQuantityBtn"

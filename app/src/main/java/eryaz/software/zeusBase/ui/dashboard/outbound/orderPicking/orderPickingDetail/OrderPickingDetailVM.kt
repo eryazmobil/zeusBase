@@ -97,7 +97,7 @@ class OrderPickingDetailVM(
         getOrderDetailPickingList()
     }
 
-    fun getOrderDetailPickingList() = executeInBackground(_uiState) {
+    fun getOrderDetailPickingList(forRefresh: Boolean = false) = executeInBackground(_uiState) {
         orderRepo.getOrderDetailPickingList(
             workActivityId = TemporaryCashManager.getInstance().workActivity?.workActivityId.orZero(),
             userId = SessionManager.userId
@@ -105,7 +105,7 @@ class OrderPickingDetailVM(
             if (it.orderDetailList.isNotEmpty()) {
                 if (it.pickingSuggestionList.isNotEmpty()) {
                     orderPickingDto = it
-                    showNext()
+                    if(!forRefresh) showNext()
                 } else {
                     parentView.emit(true)
                 }
@@ -145,7 +145,6 @@ class OrderPickingDetailVM(
                 _productDetail.emit(it.product)
                 checkProductOrder()
             }.onError { _, _ ->
-                _showProductDetail.emit(false)
                 productBarcode.emit("")
                 showError(
                     ErrorDialogDto(
@@ -209,6 +208,7 @@ class OrderPickingDetailVM(
             ).onSuccess {
                 updateOrderQuantity()
                 checkFinishedOrderFromCardPosition()
+                getOrderDetailPickingList(true)
                 checkPickingFromOrder()
 
                 enteredQuantity.value = ""
@@ -332,7 +332,6 @@ class OrderPickingDetailVM(
     }
 
     private fun checkProductOrder() {
-        Log.d("TAG", "checkProductOrder: ${orderPickingDto?.orderDetailList}")
         orderPickingDto?.orderDetailList?.find {
             it.quantityCollected < it.quantity && it.product.id == productId
         }?.let { orderDetail ->
@@ -435,7 +434,6 @@ class OrderPickingDetailVM(
         productId = dto.id
         viewModelScope.launch {
             _productDetail.emit(dto)
-            _showProductDetail.emit(true)
             _productQuantity.emit("x " + 1)
             checkProductOrder()
         }

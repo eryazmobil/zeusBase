@@ -14,7 +14,7 @@ class InfoProductEdtAdapter :
     var onDeleteClick: (StockTackingProcessDto) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return InfoProductEdtVH.Companion.from(
+        return InfoProductEdtVH.from(
             parent
         )
     }

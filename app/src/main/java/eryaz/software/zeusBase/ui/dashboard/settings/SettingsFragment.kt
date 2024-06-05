@@ -1,5 +1,6 @@
 package eryaz.software.zeusBase.ui.dashboard.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import eryaz.software.zeusBase.R
+import eryaz.software.zeusBase.core.ApkDownloadService
 import eryaz.software.zeusBase.data.models.dto.CompanyDto
 import eryaz.software.zeusBase.data.models.dto.WarehouseDto
 import eryaz.software.zeusBase.databinding.FragmentSettingsBinding
@@ -55,6 +58,15 @@ class SettingsFragment : BaseFragment() {
             }
         }
 
+        binding.appVersionUpdate.setOnSingleClickListener{
+
+            viewModel.pdaVersionModel.value?.let {
+                ApkDownloadService.startService(requireContext(),it.downloadLink,it.apkZipName,it.apkFileName)
+            }
+
+
+        }
+
         binding.appLanguage.setOnSingleClickListener {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageFragment())
         }
@@ -98,9 +110,10 @@ class SettingsFragment : BaseFragment() {
 
         setFragmentResultListener(LanguageFragment.LANGUAGE_FRAGMENT_TAG) { _, bundle ->
             bundle.getString(LanguageFragment.LANGUAGE_FRAGMENT_KEY)?.let {
-                Log.d("TAG", "language: $it")
                 viewModel.setLanguage(it)
             }
         }
     }
+
+
 }

@@ -66,6 +66,8 @@ class QueryShelfFragment : BaseFragment() {
     private val shelfAdapter by lazy(LazyThreadSafetyMode.NONE) {
         ShelfProductQuantityAdapter().also {
             binding.recyclerViewForShelf.adapter = it
+            it.showProduct = true
+
         }
     }
 

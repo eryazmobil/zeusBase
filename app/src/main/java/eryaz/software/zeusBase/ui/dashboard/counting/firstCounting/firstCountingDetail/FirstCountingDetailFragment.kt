@@ -131,6 +131,10 @@ class FirstCountingDetailFragment : BaseFragment() {
 
     override fun subscribeToObservables() {
 
+        if (viewModel.assignedShelfId != 0) {
+            viewModel.getSTActionProcessListForShelf()
+        }
+
         viewModel.readShelfBarcode.observe(this) {
             if (it) {
                 binding.searchProductEdt.requestFocus()
@@ -140,7 +144,8 @@ class FirstCountingDetailFragment : BaseFragment() {
         viewModel.hasNotProductBarcode.observe(this) {
             if (it) {
                 errorDialog.show(
-                    context, ErrorDialogDto(titleRes = R.string.error,
+                    context, ErrorDialogDto(
+                        titleRes = R.string.error,
                         messageRes = R.string.msg_no_barcode_and_new_barcode,
                         positiveButton = ButtonDto(text = R.string.yes, onClickListener = {
                             findNavController().navigate(

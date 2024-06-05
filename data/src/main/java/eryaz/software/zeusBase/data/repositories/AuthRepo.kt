@@ -2,6 +2,7 @@ package eryaz.software.zeusBase.data.repositories
 
 import eryaz.software.zeusBase.data.api.utils.ResponseHandler
 import eryaz.software.zeusBase.data.api.services.AuthApiService
+import eryaz.software.zeusBase.data.mappers.toDto
 import eryaz.software.zeusBase.data.models.remote.request.LoginRequest
 
 class AuthRepo(private val api: AuthApiService) : BaseRepo() {
@@ -14,7 +15,7 @@ class AuthRepo(private val api: AuthApiService) : BaseRepo() {
 
     suspend fun getPdaVersion() = callApi {
         val response = api.getPdaVersion()
-        ResponseHandler.handleSuccess(response, response.result)
+        ResponseHandler.handleSuccess(response, response.result.toDto())
     }
 
 }

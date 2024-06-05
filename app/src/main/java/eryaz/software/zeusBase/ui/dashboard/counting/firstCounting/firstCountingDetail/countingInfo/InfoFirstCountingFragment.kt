@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import eryaz.software.zeusBase.R
 import eryaz.software.zeusBase.databinding.FragmentInfoFirstCountingBinding
 import eryaz.software.zeusBase.ui.base.BaseFragment
+import eryaz.software.zeusBase.ui.dashboard.counting.adapter.InfoProductEdtAdapter
 import eryaz.software.zeusBase.util.extensions.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -68,7 +69,7 @@ class InfoFirstCountingFragment : BaseFragment() {
     }
 
     private val productEdtAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        eryaz.software.zeusBase.ui.dashboard.counting.adapter.InfoProductEdtAdapter().also {
+        InfoProductEdtAdapter().also {
             binding.recyclerView.adapter = it
         }
     }

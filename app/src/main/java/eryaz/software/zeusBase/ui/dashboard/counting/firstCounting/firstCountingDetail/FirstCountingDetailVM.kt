@@ -82,6 +82,7 @@ class FirstCountingDetailVM(
                 storageId = 0
             ).onSuccess {
                 assignedShelfId = it.shelfId
+                readShelfBarcode.emit(false)
                 getSTActionProcessListForShelf()
             }.onError { _, _ ->
                 showError(
@@ -94,7 +95,7 @@ class FirstCountingDetailVM(
         }
     }
 
-    private fun getSTActionProcessListForShelf() {
+     fun getSTActionProcessListForShelf() {
         executeInBackground(showProgressDialog = true) {
             countingRepo.getSTActionProcessListForShelf(
                 stHeaderId = stHeaderId,
@@ -103,8 +104,8 @@ class FirstCountingDetailVM(
                 if (it.isNotEmpty()) {
                     stockTakingActionProcessList.emit(it)
                     stDetailId = it[0].stockTakingDetail!!.id
-                    getShelfIsOnAssignedUser()
                 }
+                getShelfIsOnAssignedUser()
             }
         }
     }
@@ -165,6 +166,7 @@ class FirstCountingDetailVM(
                     quantityEdt.value = ""
                     _showProductDetail.emit(false)
                     _productDetail.emit(null)
+                    resultQuantity = 0.0
                 }
             }
         }

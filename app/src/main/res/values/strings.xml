@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Zeus - Base</string>
     <string name="there_is_empty_fields_or_check_internet_connection">Alanlardan birini boş girdiniz ilerlemek için lütfen doğru bilgiler girin ve internet bağlantınızı kontrol edin</string>
     <string name="do_you_want_to_end_acceptance_collect_and_enter_password">İşlemi bitirmek istiyorsanız lütfen personel şifrenizi giriniz.</string>
     <string name="barcode_or_quantitiy_empty">Barkod\'u veya adet sayısını boş girdiniz ilerlemeki için lütfen doğru bilgiler girin</string>
@@ -174,9 +175,9 @@
     <string name="app_version_info">Uygulama Sürümünüz</string>
     <string name="app_version">1.0.0</string>
     <string name="app_is_up_to_date">Güncel</string>
-    <string name="app_is_not_up_to_date">güncellemesi mevcuttur, uygulamayı kapatıp açınız!</string>
+    <string name="app_is_not_up_to_date">Güncellemesi mevcuttur, uygulamayı kapatıp açınız!</string>
     <string name="app_check_update">KONTROL ET</string>
-    <string name="app_get_update">GÜNCELLEMEYİ AL</string>
+    <string name="app_get_update">güncellemesini al</string>
     <string name="change_password_">Şifre Değiştirme</string>
     <string name="signalR_info_title">Bildirim</string>
     <string name="okay">Tamam</string>

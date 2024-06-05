@@ -19,7 +19,7 @@ class QueryStorageFragmentVM(
 ) : BaseViewModel() {
     val searchProduct = MutableStateFlow("")
 
-    private val _productDetail = MutableStateFlow<BarcodeDto?>(null)
+    private val _productDetail = MutableStateFlow<ProductDto?>(null)
     val productDetail = _productDetail.asStateFlow()
 
     private val _showProductDetail = MutableStateFlow(false)
@@ -36,7 +36,7 @@ class QueryStorageFragmentVM(
             searchProduct.value.trim(),
             SessionManager.companyId
         ).onSuccess {
-            _productDetail.emit(it)
+            _productDetail.emit(it.product)
             getProductStorageQuantityList(it.product.id)
             getProductShelfQuantityList(it.product.id)
         }.onError { message, _ ->
@@ -81,5 +81,6 @@ class QueryStorageFragmentVM(
     fun setExitStorage(it: ProductDto) {
         getProductStorageQuantityList(it.id)
         getProductShelfQuantityList(it.id)
+        _productDetail.value = it
     }
 }
