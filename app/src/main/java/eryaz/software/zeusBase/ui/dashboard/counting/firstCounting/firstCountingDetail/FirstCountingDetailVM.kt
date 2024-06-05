@@ -1,5 +1,6 @@
 package eryaz.software.zeusBase.ui.dashboard.counting.firstCounting.firstCountingDetail
 
+import androidx.lifecycle.asLiveData
 import eryaz.software.zeusBase.R
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
@@ -10,6 +11,8 @@ import eryaz.software.zeusBase.data.persistence.SessionManager
 import eryaz.software.zeusBase.data.repositories.CountingRepo
 import eryaz.software.zeusBase.data.repositories.WorkActivityRepo
 import eryaz.software.zeusBase.ui.base.BaseViewModel
+import eryaz.software.zeusBase.util.extensions.orZero
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -25,22 +28,22 @@ class FirstCountingDetailVM(
     private var oldQuantity: Double = 0.0
     private var resultQuantity: Double = 0.0
 
-    private val stockTakingActionProcessList = MutableStateFlow<List<StockTackingProcessDto>>(emptyList())
+    private val stockTakingActionProcessList =
+        MutableStateFlow<List<StockTackingProcessDto>>(emptyList())
 
-    val readShelfBarcode = MutableStateFlow(false)
     val searchProduct = MutableStateFlow("")
     val searchShelf = MutableStateFlow("")
     var quantityEdt = MutableStateFlow("")
-    val hasNotProductBarcode = MutableStateFlow(false)
 
-    private val _actionAddProduct = MutableStateFlow(false)
-    val actionAddProduct = _actionAddProduct.asStateFlow()
+    val hasNotProductBarcode = MutableSharedFlow<Boolean>()
+    val readShelfBarcode = MutableSharedFlow<Boolean>()
+    val readShelfBarcodeStateFlow = readShelfBarcode.asLiveData()
+    val actionAddProduct = MutableSharedFlow<Boolean>()
+    val actionProcess = MutableSharedFlow<Boolean>()
+    val actionIsFinished = MutableSharedFlow<Boolean>()
 
     private val _productDetail = MutableStateFlow<BarcodeDto?>(null)
     val productDetail = _productDetail.asStateFlow()
-
-    private val _actionIsFinished = MutableStateFlow(true)
-    val actionIsFinished = _actionIsFinished.asStateFlow()
 
     private val _showProductDetail = MutableStateFlow(false)
     val showProductDetail = _showProductDetail.asStateFlow()
@@ -82,8 +85,7 @@ class FirstCountingDetailVM(
                 storageId = 0
             ).onSuccess {
                 assignedShelfId = it.shelfId
-                readShelfBarcode.emit(false)
-                getSTActionProcessListForShelf()
+                getShelfIsOnAssignedUser()
             }.onError { _, _ ->
                 showError(
                     ErrorDialogDto(
@@ -95,7 +97,7 @@ class FirstCountingDetailVM(
         }
     }
 
-     fun getSTActionProcessListForShelf() {
+    fun getSTActionProcessListForShelf() {
         executeInBackground(showProgressDialog = true) {
             countingRepo.getSTActionProcessListForShelf(
                 stHeaderId = stHeaderId,
@@ -103,9 +105,9 @@ class FirstCountingDetailVM(
             ).onSuccess {
                 if (it.isNotEmpty()) {
                     stockTakingActionProcessList.emit(it)
-                    stDetailId = it[0].stockTakingDetail!!.id
+                    stDetailId = it[0].stockTakingDetail?.id.orZero()
+                    actionProcess.emit(true)
                 }
-                getShelfIsOnAssignedUser()
             }
         }
     }
@@ -145,15 +147,14 @@ class FirstCountingDetailVM(
 
     fun addProduct(addOn: Boolean) {
         if (isValidFields()) {
-            if (addOn) {
-                resultQuantity = oldQuantity + quantityEdt.value.toDouble()
+            resultQuantity = if (addOn) {
+                oldQuantity + quantityEdt.value.toDouble()
             } else {
-                resultQuantity += quantityEdt.value.toDouble()
+                oldQuantity = 0.0
+                quantityEdt.value.toDouble()
             }
             //raf miktar ve urunun bos olmama kontrolu
-            executeInBackground(
-                showProgressDialog = true
-            ) {
+            executeInBackground(showProgressDialog = true) {
                 countingRepo.addProduct(
                     stHeaderId = stHeaderId,
                     userId = SessionManager.userId,
@@ -161,12 +162,11 @@ class FirstCountingDetailVM(
                     assignedShelfId = assignedShelfId,
                     countedQuantity = resultQuantity.toInt()
                 ).onSuccess {
-                    _actionAddProduct.emit(true)
+                    actionAddProduct.emit(true)
                     searchProduct.value = ""
                     quantityEdt.value = ""
                     _showProductDetail.emit(false)
                     _productDetail.emit(null)
-                    resultQuantity = 0.0
                 }
             }
         }
@@ -215,14 +215,12 @@ class FirstCountingDetailVM(
     }
 
     fun saveBtn() {
-        executeInBackground(
-            showProgressDialog = true
-        ) {
+        executeInBackground(showProgressDialog = true) {
             countingRepo.finishSTDetail(
                 stDetailId = stDetailId,
                 userId = SessionManager.userId
             ).onSuccess {
-                _actionIsFinished.emit(true)
+                actionIsFinished.emit(true)
                 searchShelf.value = ""
                 searchProduct.value = ""
                 quantityEdt.value = ""
