@@ -23,142 +23,154 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/productCode"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
                 android:fontFamily="@font/sogeoui"
-                android:gravity="center"
+                android:gravity="start"
                 android:minHeight="32dp"
                 android:text="@{dto.product.code}"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/quantityTitle"
-                app:layout_constraintHorizontal_bias="0.0"
+
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="VALO SELTSDF ANAHTARI" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/productDef"
-                android:layout_width="@dimen/_200sdp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
                 android:gravity="start"
                 android:maxLines="2"
                 android:minHeight="32dp"
                 android:text="@{dto.product.definition}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                tools:text="DİREKSİYON KUTUSU EPS ROTBAŞSIZ P KONUM 0"
                 app:layout_constraintEnd_toStartOf="@+id/controlTitle"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/productCode" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/quantityTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/sogeoui"
-                    android:text="ADET"
-                    android:gravity="center"
-                    android:minHeight="@dimen/_12sdp"
-                    android:minWidth="@dimen/_12sdp"
-                    android:textColor="@color/black"
-                    android:textSize="8sp"
-                    tools:ignore="SmallSp"
-                    app:layout_constraintEnd_toStartOf="@+id/quantityCountTxt"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/quantityCountTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{dto.quantityControlled}"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    tools:text="123"
-                    android:minHeight="@dimen/_12sdp"
-                    android:minWidth="@dimen/_12sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/controlTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sogeoui"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="KONT"
-                    android:textColor="@color/black"
-                    android:textSize="8sp"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:minHeight="@dimen/_12sdp"
-                    android:minWidth="@dimen/_12sdp"
-                    app:layout_constraintEnd_toStartOf="@+id/controlValueTxt"
-                    app:layout_constraintTop_toTopOf="@+id/controlValueTxt"
-                    app:layout_constraintBottom_toBottomOf="@+id/controlValueTxt"
-                     />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/controlValueTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:fontFamily="@font/sogeoui"
-                    android:gravity="center"
-                    android:minWidth="@dimen/_22sdp"
-                    android:minHeight="@dimen/_22sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/quantityCountTxt" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/placementTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:fontFamily="@font/sogeoui"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="YERLEŞ"
-                    android:textColor="@color/black"
-                    android:textSize="8sp"
-                    app:layout_constraintTop_toTopOf="@+id/statusValueTxt"
-                    app:layout_constraintBottom_toBottomOf="@+id/statusValueTxt"
-                    app:layout_constraintEnd_toStartOf="@+id/statusValueTxt"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/statusValueTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sogeoui"
-                    android:gravity="center"
-                    android:minWidth="@dimen/_22sdp"
-                    android:minHeight="@dimen/_22sdp"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/controlValueTxt" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/quantityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/sogeoui"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:minHeight="@dimen/_12sdp"
+                android:minWidth="@dimen/_12sdp"
+                android:text="ADET"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toStartOf="@+id/quantityCountTxt"
+                app:layout_constraintStart_toStartOf="@+id/controlTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/productManufacturer"
+                android:id="@+id/quantityCountTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/_22sdp"
+                android:minHeight="@dimen/_22sdp"
+                android:padding="@dimen/_5sdp"
+                android:text="@{dto.quantityControlled}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/controlValueTxt"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="123" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/controlTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sogeoui"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="KONT"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:minHeight="@dimen/_12sdp"
+                android:minWidth="@dimen/_12sdp"
+                app:layout_constraintEnd_toStartOf="@+id/controlValueTxt"
+                app:layout_constraintTop_toTopOf="@+id/controlValueTxt"
+                app:layout_constraintBottom_toBottomOf="@+id/controlValueTxt"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/controlValueTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
+                android:fontFamily="@font/sogeoui"
                 android:gravity="center"
+                android:minWidth="@dimen/_22sdp"
+                android:minHeight="@dimen/_22sdp"
+                android:padding="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/quantityCountTxt" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/placementTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/sogeoui"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="YERLEŞ"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/statusValueTxt"
+                app:layout_constraintEnd_toStartOf="@+id/statusValueTxt"
+                app:layout_constraintStart_toStartOf="@+id/controlTitle"
+                app:layout_constraintTop_toTopOf="@+id/statusValueTxt" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/statusValueTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sogeoui"
+                android:gravity="center"
+                android:minWidth="@dimen/_22sdp"
+                android:minHeight="@dimen/_22sdp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/controlValueTxt" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/productManufacturer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="start"
                 android:minHeight="32dp"
                 android:text="@{dto.product.manufacturer}"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/placementTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDef" />
+                app:layout_constraintTop_toBottomOf="@id/productDef"
+                tools:text="VALEO" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

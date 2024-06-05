@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import eryaz.software.zeusBase.data.R
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
-import eryaz.software.zeusBase.data.models.dto.BarcodeDto
 import eryaz.software.zeusBase.data.models.dto.ErrorDialogDto
 import eryaz.software.zeusBase.data.models.dto.ProductDto
 import eryaz.software.zeusBase.data.models.dto.ShelfDto

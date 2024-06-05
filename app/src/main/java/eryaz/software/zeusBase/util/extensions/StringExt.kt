@@ -15,6 +15,10 @@ fun String?.toDoubleOrZero(): Double {
     return this?.toDoubleOrNull() ?: 0.0
 }
 
+fun String?.toIntOrOne(): Int {
+    return this?.toIntOrNull() ?: 1
+}
+
 fun String?.trimSpace(): String {
     return this?.replace(" ", "") ?: ""
 }

@@ -34,7 +34,8 @@ class AcceptanceProcessVM(
     val actionIsFinished = MutableStateFlow(false)
     val controlSuccess = MutableSharedFlow<Boolean>()
     val quantity = MutableStateFlow("1")
-    val multiplier = MutableStateFlow("")
+    val multiplier = MutableStateFlow("x 1")
+    val multiplierValue = MutableStateFlow(1)
     val qtyContainer = MutableStateFlow(0)
     val serialValue = MutableStateFlow("")
 
@@ -121,6 +122,7 @@ class AcceptanceProcessVM(
                     _productDetail.emit(it.product)
                     _hasSerial.emit(it.product.hasSerial)
                     multiplier.emit("× " + it.quantity.toString())
+                    multiplierValue.emit(it.quantity)
                 }
                 isProductValid()
             }.onError { _, _ ->
@@ -141,7 +143,7 @@ class AcceptanceProcessVM(
                 repo.updateWaybillControlAddQuantity(
                     actionId = it.workActionId,
                     productId = productID,
-                    quantity = quantity,
+                    quantity = quantity * multiplierValue.value,
                     allowOverload = allowOverload,
                     serialLot = serialValue.value,
                     containerCount = qtyContainer.value

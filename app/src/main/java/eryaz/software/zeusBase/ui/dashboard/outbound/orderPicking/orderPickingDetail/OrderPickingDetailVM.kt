@@ -40,6 +40,8 @@ class OrderPickingDetailVM(
     private val fifoCode = MutableStateFlow(" ")
     val parentView = MutableStateFlow(false)
     var productId: Int = 0
+    val multiplierValue = MutableStateFlow(1)
+
 
     private var orderPickingDto: OrderPickingDto? = null
     private var selectedOrderDetailProduct: OrderDetailDto? = null
@@ -105,7 +107,7 @@ class OrderPickingDetailVM(
             if (it.orderDetailList.isNotEmpty()) {
                 if (it.pickingSuggestionList.isNotEmpty()) {
                     orderPickingDto = it
-                    if(!forRefresh) showNext()
+                    if (!forRefresh) showNext()
                 } else {
                     parentView.emit(true)
                 }
@@ -143,6 +145,7 @@ class OrderPickingDetailVM(
                 productId = it.product.id
                 _productQuantity.emit("x " + it.quantity.toString())
                 _productDetail.emit(it.product)
+                multiplierValue.emit(it.quantity)
                 checkProductOrder()
             }.onError { _, _ ->
                 productBarcode.emit("")
@@ -202,7 +205,7 @@ class OrderPickingDetailVM(
                 productId = productId,
                 shelfId = shelfId,
                 containerId = 0,
-                quantity = quantity,
+                quantity = quantity * multiplierValue.value,
                 orderDetailId = selectedOrderDetailProduct?.id.orZero(),
                 fifoCode = fifoCode.value
             ).onSuccess {
@@ -381,7 +384,13 @@ class OrderPickingDetailVM(
             orderPickingDto?.pickingSuggestionList?.getOrNull(selectedSuggestionIndex)?.let {
                 _selectedSuggestion.emit(it)
                 productId = it.product.id
-            } ?: run { selectedSuggestionIndex-- }
+            } ?: run {
+                selectedSuggestionIndex - 2
+                orderPickingDto?.pickingSuggestionList?.getOrNull(selectedSuggestionIndex)?.let {
+                    _selectedSuggestion.emit(it)
+                    productId = it.product.id
+                }
+            }
 
             _orderQuantityTxt.emit(
                 "${orderPickingDto?.pickingSuggestionList?.getOrNull(selectedSuggestionIndex)?.quantityPicked} / " +
@@ -434,7 +443,7 @@ class OrderPickingDetailVM(
         productId = dto.id
         viewModelScope.launch {
             _productDetail.emit(dto)
-            _productQuantity.emit("x " + 1)
+            _productQuantity.emit("x 1")
             checkProductOrder()
         }
     }

@@ -25,6 +25,7 @@ import eryaz.software.zeusBase.util.dialogs.QuestionDialog
 import eryaz.software.zeusBase.util.extensions.hideSoftKeyboard
 import eryaz.software.zeusBase.util.extensions.onBackPressedCallback
 import eryaz.software.zeusBase.util.extensions.parcelable
+import eryaz.software.zeusBase.util.extensions.toIntOrOne
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AcceptanceProcessFragment : BaseFragment() {
@@ -146,7 +147,7 @@ class AcceptanceProcessFragment : BaseFragment() {
                     )
                 }
 
-                else -> viewModel.updateWaybillControlAddQuantity(viewModel.quantity.value.toInt())
+                else -> viewModel.updateWaybillControlAddQuantity(viewModel.quantity.value.toIntOrOne())
             }
         }
     }
