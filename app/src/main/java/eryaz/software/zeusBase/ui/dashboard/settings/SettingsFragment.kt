@@ -58,14 +58,6 @@ class SettingsFragment : BaseFragment() {
             }
         }
 
-        binding.appVersionUpdate.setOnSingleClickListener{
-
-            viewModel.pdaVersionModel.value?.let {
-                ApkDownloadService.startService(requireContext(),it.downloadLink,it.apkZipName,it.apkFileName)
-            }
-
-
-        }
 
         binding.appLanguage.setOnSingleClickListener {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageFragment())
@@ -88,6 +80,24 @@ class SettingsFragment : BaseFragment() {
         binding.changePassword.setOnSingleClickListener {
             findNavController().navigate(
                 SettingsFragmentDirections.actionSettingFragmentToPasswordDialog()
+            )
+        }
+
+        binding.appVersionUpdate.setOnSingleClickListener {
+
+            viewModel.pdaVersionModel.value?.let {
+                ApkDownloadService.startService(
+                    requireContext(),
+                    it.downloadLink,
+                    it.apkZipName,
+                    it.apkFileName
+                )
+            }
+        }
+
+        binding.lockBtn.setOnClickListener {
+            findNavController().navigate(
+                SettingsFragmentDirections.actionSettingsFragmentToAppLockFragment()
             )
         }
     }

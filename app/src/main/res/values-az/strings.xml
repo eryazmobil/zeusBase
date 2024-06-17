@@ -701,5 +701,11 @@
     <string name="delivered_person">Təslim edilən adı</string>
     <string name="collected_pack">Yüklənmiş</string>
     <string name="can_not_placement">Kontrol ədədindən çox məhsul yerləşdirə bilməzsiniz</string>
+    <string name="enter_secret_password_txt">Sizə təyin olunmuş gizli şifrəni daxil edin</string>
+    <string name="secret_password">Gizli şifrəni girin</string>
+    <string name="app_lock">Kilitlə</string>
+    <string name="app_unlock">Kilitdən aç</string>
+    <string name="app_lock_btn">Uygulama Kilitleme</string>
+
 
 </resources>

@@ -194,7 +194,7 @@ class DashboardDetailViewModel(
                         titleRes = R.string.menu_sub_counting_partial_sub,
                             type = DashboardDetailPermissionType.PARTIALWAREHOUSECOUNTING,
                         hasPermission = ObservableField(true)
-                    ),
+                    )
                 )
             }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="eryaz.software.zeusBase.ui.dashboard.settings.SettingsViewModel" />
@@ -84,22 +85,22 @@
                         android:id="@+id/companyItem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:value="@{viewModel.companyName}"
                         app:cardCornerRadius="@dimen/_15sdp"
                         app:cardElevation="0dp"
-                        tools:value="SIRKET"
-                        android:value="@{viewModel.companyName}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:title="@string/company_" />
+                        app:title="@string/company_"
+                        tools:value="ERYAZ" />
 
                     <eryaz.software.zeusBase.util.widgets.SettingsItem
                         android:id="@+id/warehouseItem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
+                        android:value="@{viewModel.warehouseName}"
                         app:cardCornerRadius="@dimen/_15sdp"
                         app:cardElevation="0dp"
-                        android:value="@{viewModel.warehouseName}"
                         app:layout_constraintTop_toBottomOf="@id/companyItem"
                         app:title="@string/warehouse_" />
 
@@ -119,9 +120,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
+                        android:clickable="@{viewModel.updateClickable}"
                         app:cardCornerRadius="@dimen/_15sdp"
                         app:cardElevation="0dp"
-                        android:clickable="@{viewModel.updateClickable}"
                         app:layout_constraintTop_toBottomOf="@id/appVersion"
                         app:title="@string/update"
                         app:value="@{viewModel.isUpToDate()}" />
@@ -133,9 +134,9 @@
                         android:layout_marginTop="15dp"
                         app:cardCornerRadius="@dimen/_15sdp"
                         app:cardElevation="0dp"
-                        app:value="@{viewModel.currentLanguage}"
                         app:layout_constraintTop_toBottomOf="@id/appVersionUpdate"
-                        app:title="@string/app_language_info" />
+                        app:title="@string/app_language_info"
+                        app:value="@{viewModel.currentLanguage}" />
 
                     <eryaz.software.zeusBase.util.widgets.SettingsItem
                         android:id="@+id/changePassword"
@@ -147,6 +148,17 @@
                         app:layout_constraintTop_toBottomOf="@+id/appLanguage"
                         app:title="@string/change_password_"
                         app:value="******" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/lockBtn"
+                        style="@style/Widget.NewZeusDemo.Button_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:padding="24dp"
+                        android:text="@string/app_lock_btn"
+                        android:textAllCaps="false"
+                        app:layout_constraintTop_toBottomOf="@+id/changePassword"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>

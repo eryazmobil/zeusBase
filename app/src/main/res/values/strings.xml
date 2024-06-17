@@ -691,7 +691,11 @@
     <string name="delivered_person">Teslim edilen adı</string>
     <string name="collected_pack">Yüklenmiş</string>
     <string name="can_not_placement">Kontrol adetinden fazla ürün yerleştiremezsiniz</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="enter_secret_password_txt">Size atanan gizli şifreyi girin</string>
+    <string name="secret_password">Gizli şifreyi giriniz</string>
+    <string name="app_lock">Kilitle</string>
+    <string name="app_unlock">Kilitten çıkar</string>
+    <string name="app_lock_btn">Uygulama Kilitleme</string>
 
 </resources>

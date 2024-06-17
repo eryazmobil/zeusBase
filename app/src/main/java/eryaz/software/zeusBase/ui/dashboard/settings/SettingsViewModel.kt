@@ -26,7 +26,8 @@ import java.lang.StringBuilder
 
 class SettingsViewModel(
     private val repo: UserRepo,
-    private val authRepo: AuthRepo) : BaseViewModel() {
+    private val authRepo: AuthRepo
+) : BaseViewModel() {
 
     private val _currentUserDto = MutableStateFlow<CurrentUserDto?>(null)
     val currentUserDto = _currentUserDto.asStateFlow()
@@ -106,7 +107,7 @@ class SettingsViewModel(
         }
     }
 
-    private fun getPdaVersion(){
+    private fun getPdaVersion() {
         executeInBackground(
             showProgressDialog = true
         ) {
@@ -118,28 +119,6 @@ class SettingsViewModel(
         }
     }
 
-    private suspend fun checkIsUpToDate(version: String?){
-        version?.let { pdaVersion ->
-            val newVersion = versionToInt(pdaVersion)
-            val currentVersion = versionToInt(BuildConfig.VERSION_NAME)
-            if (newVersion > currentVersion) {
-                isUpToDate.emit(version + " " + stringProvider.invoke(R.string.app_get_update))
-                updateClickable.emit(true)
-            }
-            else {
-                isUpToDate.emit(stringProvider.invoke(R.string.app_is_up_to_date))
-            }
-        }
-    }
-
-    private fun versionToInt(version: String) : Int{
-        val list = version.split(".")
-        val sb = StringBuilder()
-        list.forEach {
-            sb.append(it)
-        }
-        return sb.toString().toIntOrZero()
-    }
 
     private fun fetchWarehouseList() = executeInBackground(_uiState) {
         repo.getWarehouseList(SessionManager.companyId).onSuccess {
@@ -220,5 +199,27 @@ class SettingsViewModel(
         viewModelScope.launch {
             _currentLanguage.emit(LanguageType.find(lang).fullName)
         }
+    }
+
+    private suspend fun checkIsUpToDate(version: String?) {
+        version?.let { pdaVersion ->
+            val newVersion = versionToInt(pdaVersion)
+            val currentVersion = versionToInt(BuildConfig.VERSION_NAME)
+            if (newVersion > currentVersion) {
+                isUpToDate.emit(version + " " + stringProvider.invoke(R.string.app_get_update))
+                updateClickable.emit(true)
+            } else {
+                isUpToDate.emit(stringProvider.invoke(R.string.app_is_up_to_date))
+            }
+        }
+    }
+
+    private fun versionToInt(version: String): Int {
+        val list = version.split(".")
+        val sb = StringBuilder()
+        list.forEach {
+            sb.append(it)
+        }
+        return sb.toString().toIntOrZero()
     }
 }

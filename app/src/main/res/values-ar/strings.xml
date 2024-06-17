@@ -690,5 +690,10 @@
     <string name="can_not_placement">لا يمكنك وضع منتجات أكثر من عدد عناصر التحكم</string>
     <string name="menu_sub_counting_partial_sub">PARÇALI SAYIM</string>
     <string name="barcode_waybill">Barkod Tanımlama</string>
+    <string name="enter_secret_password_txt">Size atanan gizli şifreyi girin</string>
+    <string name="secret_password">Gizli şifreyi giriniz</string>
+    <string name="app_lock">Kilitle</string>
+    <string name="app_unlock">Kilitten çıkar</string>
+    <string name="app_lock_btn">Uygulama Kilitleme</string>
 
 </resources>

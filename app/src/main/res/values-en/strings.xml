@@ -687,6 +687,11 @@
     <string name="delivered_person">Delivered name</string>
     <string name="collected_pack">Loaded</string>
     <string name="can_not_placement">You cannot place more products than the control quantity.</string>
+    <string name="enter_secret_password_txt">Enter the secret password assigned to you</string>
+    <string name="secret_password">Enter the secret password</string>
+    <string name="app_lock">App Lock</string>
+    <string name="app_unlock">App Unlock</string>
+    <string name="app_lock_btn">Uygulama Kilitleme</string>
 
     <string name="wms">Zeus Warehouse Management \nSystem</string>
     <string name="app_language_choose">Select Language</string>
