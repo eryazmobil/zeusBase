@@ -1,6 +1,7 @@
 package eryaz.software.zeusBase.util.extensions
 
 import eryaz.software.zeusBase.data.persistence.SessionManager
+import eryaz.software.zeusBase.util.extensions.DateUtils.calendarToDate
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar

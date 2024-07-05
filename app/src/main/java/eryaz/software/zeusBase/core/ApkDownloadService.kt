@@ -100,7 +100,7 @@ class ApkDownloadService : Service() {
                 }
             }
         } catch (e: IOException) {
-            toast("Apk zip dosyasından çıkarılmaya çalışırken bir hata meydana geldi.")
+            toast(getString(R.string.error_occured))
         }
     }
 

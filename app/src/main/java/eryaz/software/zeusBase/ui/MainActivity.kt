@@ -25,13 +25,14 @@ class MainActivity : BaseActivity() {
     private val navController by lazy(LazyThreadSafetyMode.NONE) {
         findNavHostNavController(R.id.nav_host)
     }
+    private var isPermissionDialogActive = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.setTranslucent(this)
         setContentView(binding.root)
         keyboardListener()
-        requestPermissions()
+        if (!SessionManager.allPermissionAccepted) requestPermissions()
         NotificationHelper.createNotificationChannel(this)
     }
 
@@ -45,6 +46,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestPermissions() {
+        isPermissionDialogActive = true
         val permissionsToRequest = mutableListOf<String>()
 
         if (ContextCompat.checkSelfPermission(
@@ -71,15 +73,27 @@ class MainActivity : BaseActivity() {
                 permissionsToRequest.toTypedArray(),
                 PERMISSION_REQUEST_CODE
             )
+            SessionManager.allPermissionAccepted = permissionsToRequest.isNotEmpty()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            SessionManager.allPermissionAccepted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+
+            isPermissionDialogActive = false
         }
     }
 
     override fun onUserLeaveHint() {
-        if (SessionManager.appIsLocked)
+        if (SessionManager.appIsLocked && !isPermissionDialogActive)
             startActivity(Intent(this, MainActivity::class.java))
         super.onUserLeaveHint()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         navController.popBackStack()
     }

@@ -17,6 +17,7 @@ object SessionManager {
     private const val KEY_WAREHOUSE_NAME = "warehouseName"
     private const val KEY_WAREHOUSE_ID = "warehouseId"
     private const val KEY_APP_IS_LOCK = "appLock"
+    private const val KEY_ALL_PERMISSION_ACCEPTED = "appLock"
 
     private lateinit var sharedPref: SharedPreferences
 
@@ -77,6 +78,12 @@ object SessionManager {
         get() = sharedPref.getBoolean(KEY_APP_IS_LOCK, true)
         set(value) {
             sharedPref.edit { putBoolean(KEY_APP_IS_LOCK, value) }
+        }
+
+    var allPermissionAccepted
+        get() = sharedPref.getBoolean(KEY_ALL_PERMISSION_ACCEPTED, false)
+        set(value) {
+            sharedPref.edit { putBoolean(KEY_ALL_PERMISSION_ACCEPTED, value) }
         }
 
     fun clearData() {
