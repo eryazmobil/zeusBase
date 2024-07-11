@@ -76,7 +76,12 @@ val appModule = module {
     viewModel { LoginViewModel(get(), get()) }
 
     //Dashboard
-    viewModel { DashboardViewModel(repo = get()) }
+    viewModel {
+        DashboardViewModel(
+            repo = get(),
+            workRepo = get()
+        )
+    }
 
     //DashboardDetail
     viewModel { (permissionType: DashboardPermissionType) ->

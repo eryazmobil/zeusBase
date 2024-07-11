@@ -24,7 +24,7 @@ object SessionManager {
     fun init(context: Context) {
         sharedPref =
             EncryptedSharedPreferences.create(
-                context, "secret_shared_prefs",
+                context, "secret_shared_prefs_1",
                 createMasterKey(context),
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -75,7 +75,7 @@ object SessionManager {
         }
 
     var appIsLocked
-        get() = sharedPref.getBoolean(KEY_APP_IS_LOCK, true)
+        get() = sharedPref.getBoolean(KEY_APP_IS_LOCK, false)
         set(value) {
             sharedPref.edit { putBoolean(KEY_APP_IS_LOCK, value) }
         }

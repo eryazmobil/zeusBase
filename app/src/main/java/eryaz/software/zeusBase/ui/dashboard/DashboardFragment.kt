@@ -6,15 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import eryaz.software.zeusBase.data.R
-import eryaz.software.zeusBase.databinding.FragmentDashboardBinding
 import eryaz.software.zeusBase.data.enums.DashboardPermissionType.RETURNING
 import eryaz.software.zeusBase.data.enums.IconType
-import eryaz.software.zeusBase.data.persistence.SessionManager.clearData
+import eryaz.software.zeusBase.databinding.FragmentDashboardBinding
 import eryaz.software.zeusBase.ui.base.BaseFragment
 import eryaz.software.zeusBase.util.adapter.dashboard.adapters.DashboardAdapter
 import eryaz.software.zeusBase.util.bindingAdapter.setOnSingleClickListener
 import eryaz.software.zeusBase.util.dialogs.QuestionDialog
-import eryaz.software.zeusBase.util.extensions.onBackPressedCallback
 import eryaz.software.zeusBase.util.extensions.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,27 +36,25 @@ class DashboardFragment : BaseFragment() {
     }
 
     override fun subscribeToObservables() {
-        viewModel.dashboardItemList
-            .observe(viewLifecycleOwner) {
-                adapter.submitList(it)
-            }
+        super.subscribeToObservables()
+
+        viewModel.dashboardItemList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
     }
 
     private val adapter by lazy {
         DashboardAdapter().also {
-            it.also {
-                binding.recyclerView.adapter = it
-            }
+            binding.recyclerView.adapter = it
         }
     }
 
     override fun setClicks() {
+        super.setClicks()
 
         adapter.onItemClick = { dto ->
             when (dto.type) {
-
                 RETURNING -> toast(getString(R.string.not_done_yet))
-
                 else -> {
                     val title = requireActivity().getString(dto.titleRes)
                     findNavController().navigate(
@@ -75,13 +71,12 @@ class DashboardFragment : BaseFragment() {
                 DashboardFragmentDirections.actionMainFragmentToNavSettings()
             )
         }
-
-        onBackPressedCallback {
+        binding.toolbar.setMenuOnClickListener {
             QuestionDialog(
                 onNegativeClickListener = {
                 },
                 onPositiveClickListener = {
-                    clearData()
+                    viewModel.updateGeneralStepByUserId()
                     findNavController().navigateUp()
                 },
                 textHeader = resources.getString(R.string.exit),

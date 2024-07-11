@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import eryaz.software.zeusBase.R
+import eryaz.software.zeusBase.core.StepCounterManager
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
 import eryaz.software.zeusBase.data.models.dto.ButtonDto
@@ -241,7 +242,6 @@ class OrderPickingDetailVM(
                                             positiveButton = ButtonDto(
                                                 text = R.string.yes,
                                                 onClickListener = {
-                                                    //krosdock olustur
                                                     createCrossDockRequest()
                                                 }
                                             ), negativeButton = ButtonDto(
@@ -277,10 +277,14 @@ class OrderPickingDetailVM(
     }
 
     private fun finishWorkAction() {
+
         executeInBackground(showProgressDialog = true) {
-            workActivityRepo.finishWorkAction(actionId = TemporaryCashManager.getInstance().workAction?.workActionId.orZero())
+            workActivityRepo.finishWorkActionForStep(
+                actionId = TemporaryCashManager.getInstance().workAction?.workActionId.orZero(),
+                endStep = StepCounterManager.getCurrentStep())
                 .onSuccess {
                     _finishWorkAction.emit(true)
+                    Log.d("TAG", "finishWorkActionForStep: success")
                 }
         }
     }
@@ -294,6 +298,7 @@ class OrderPickingDetailVM(
                 collected += quantity
             }
         }
+
         if (quantity > 0) {
             if (selectedSuggestion.value?.quantityWillBePicked?.minus(selectedSuggestion.value?.quantityPicked.orZero())
                     .orZero() >= quantity
