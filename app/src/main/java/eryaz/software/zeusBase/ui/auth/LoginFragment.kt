@@ -1,6 +1,7 @@
 package eryaz.software.zeusBase.ui.auth
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +44,9 @@ class LoginFragment : BaseFragment() {
                 )
 
                 StepCounterManager.resetSteps()
-                StepCounterManager.initialize(requireContext())
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    StepCounterManager.initialize(requireContext())
+                }
             }
         }
     }

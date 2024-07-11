@@ -1,7 +1,6 @@
 package eryaz.software.zeusBase.ui
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -11,8 +10,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import eryaz.software.zeusBase.core.StepCounterManager
 import eryaz.software.zeusBase.data.persistence.SessionManager
-import eryaz.software.zeusBase.data.stepService.AccelSensorDetector
-import eryaz.software.zeusBase.data.stepService.StepListener
 import eryaz.software.zeusBase.databinding.ActivityMainBinding
 import eryaz.software.zeusBase.ui.base.BaseActivity
 import eryaz.software.zeusBase.util.KeyboardEventListener
@@ -51,8 +48,7 @@ class MainActivity : BaseActivity() {
         ) {
             requestActivityRecognitionPermission()
         } else {
-            StepCounterManager.initialize(this@MainActivity)
-            SessionManager.appIsLocked = true
+            requestPermissions()
         }
     }
 
@@ -98,6 +94,11 @@ class MainActivity : BaseActivity() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    StepCounterManager.initialize(this@MainActivity)
+                }
+                SessionManager.appIsLocked = true
+
             }
         }
 
