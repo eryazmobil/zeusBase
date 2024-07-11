@@ -44,12 +44,9 @@ class OrderPickingDetailFragment : BaseFragment() {
     }
 
     override fun setClicks() {
-        onBackPressedCallback {
-            viewModel.checkCrossDockNeedByActionId()
-        }
 
         binding.toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            viewModel.checkCrossDockNeedByActionId()
         }
 
         binding.toolbar.setMenuOnClickListener {

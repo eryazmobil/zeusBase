@@ -6,6 +6,7 @@ import eryaz.software.zeusBase.data.mappers.toDto
 import eryaz.software.zeusBase.data.models.dto.ProductShelfWorkActivityDto
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfInsertRequest
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfUpdateRequest
+import eryaz.software.zeusBase.data.models.remote.request.StepCountRequest
 
 class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
 
@@ -60,7 +61,7 @@ class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
 
     suspend fun getShelfTypeByShelfId(shelfId: Int) = callApi {
         val response = api.getShelfTypeByShelfId(shelfId)
-        ResponseHandler.handleSuccess(response,response.result.toDto())
+        ResponseHandler.handleSuccess(response, response.result.toDto())
     }
 
     suspend fun getShelfByCodeForStocktaking(
@@ -454,19 +455,18 @@ class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
     suspend fun createShelfMovementForReplenishment(
         workActivityId: Int,
         productId: Int,
-        shelfIdDto:Int,
-        shelfIdFrom:Int,
+        shelfIdDto: Int,
+        shelfIdFrom: Int,
         quantity: Int
-    )
-    = callApi {
+    ) = callApi {
         val response = api.createShelfMovementForReplenishment(
-            workActivityId =workActivityId,
+            workActivityId = workActivityId,
             productId = productId,
             shelfIdTo = shelfIdDto,
             shelfIdFrom = shelfIdFrom,
             quantity = quantity
         )
-        ResponseHandler.handleSuccess(response,response.success)
+        ResponseHandler.handleSuccess(response, response.success)
     }
 
     suspend fun getProductShelfQuantityListForProductShelfSupplyForPda(
@@ -474,41 +474,69 @@ class WorkActivityRepo(private val api: WorkActivityService) : BaseRepo() {
         companyId: Int,
         warehouseId: Int,
         storageId: Int
-    )
-    = callApi {
+    ) = callApi {
         val response = api.getProductShelfQuantityListForProductShelfSupplyForPda(
             productId,
             companyId,
             warehouseId,
             storageId
         )
-        ResponseHandler.handleSuccess(response,response.result.map { it.toDto() })
+        ResponseHandler.handleSuccess(response, response.result.map { it.toDto() })
     }
 
     suspend fun getReportProductShelfListForWorkActivityForPda(
-        typeId : Int,
+        typeId: Int,
         companyId: Int,
         warehouseId: Int
-    )
-    = callApi {
+    ) = callApi {
         val response = api.getReportProductShelfListForWorkActivityForPda(
             typeId,
             companyId,
             warehouseId
         )
-        ResponseHandler.handleSuccess(response,response.result.map { it.toDto() })
+        ResponseHandler.handleSuccess(response, response.result.map { it.toDto() })
     }
 
     suspend fun createProductShelfWorkActivityForPda(
         typeId: Int,
         productShelfWorkActivityDto: ProductShelfWorkActivityDto
-    )
-    = callApi {
+    ) = callApi {
         val response = api.createProductShelfWorkActivityForPda(
             typeId = typeId,
             productShelfWorkActivityDto = productShelfWorkActivityDto
         )
-        ResponseHandler.handleSuccess(response,response.success)
+        ResponseHandler.handleSuccess(response, response.success)
+    }
+
+    suspend fun updateGeneralStepByUserId(stepCountRequest: StepCountRequest) = callApi {
+        val response = api.updateGeneralStepByUserId(
+            stepCountRequest = stepCountRequest
+        )
+        ResponseHandler.handleSuccess(response, response.success)
+    }
+
+    suspend fun createWorkActionWithStep(
+        activityId: Int,
+        actionTypeCode: String,
+        startStep: Int
+    ) = callApi {
+        val response = api.createWorkActionWithStep(
+            activityId = activityId,
+            actionTypeCode = actionTypeCode,
+            startStep = startStep
+        )
+        ResponseHandler.handleSuccess(response, response.result.toDto())
+    }
+
+    suspend fun finishWorkActionForStep(
+        actionId: Int,
+        endStep: Int
+    ) = callApi {
+        val response = api.finishWorkActionForStep(
+            actionId = actionId,
+            endStep = endStep
+        )
+        ResponseHandler.handleSuccess(response, response.success)
     }
 
 }

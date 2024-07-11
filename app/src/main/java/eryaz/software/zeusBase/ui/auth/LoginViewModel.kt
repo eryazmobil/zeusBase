@@ -66,10 +66,12 @@ class LoginViewModel(
         userRepo.fetchWorkActionTypeList().onSuccess {
             TemporaryCashManager.getInstance().workActionTypeList = it
             _navigateToMain.emit(true)
+            email.emit("")
+            password.emit("")
         }
     }
 
-    private fun getFirebaseToken(){
+    private fun getFirebaseToken() {
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {

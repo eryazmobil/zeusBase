@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
+import eryaz.software.zeusBase.core.StepCounterManager
 import eryaz.software.zeusBase.databinding.FragmentLoginBinding
 import eryaz.software.zeusBase.ui.base.BaseFragment
 import eryaz.software.zeusBase.util.extensions.handleProgress
@@ -28,17 +29,6 @@ class LoginFragment : BaseFragment() {
         return binding.root
     }
 
-    // this is for redirecting after notification but not necessary yet
-//    override fun onResume() {
-//        super.onResume()
-//        val intent = requireActivity().intent
-//        if (intent != null && intent.hasExtra("key")) {
-//            findNavController().navigate(
-//                LoginFragmentDirections.actionLoginFragmentToMainFragment()
-//            )
-//        }
-//    }
-
     override fun subscribeToObservables() {
         binding.edtUserName.requestFocus()
 
@@ -51,6 +41,9 @@ class LoginFragment : BaseFragment() {
                 findNavController().navigate(
                     LoginFragmentDirections.actionLoginFragmentToMainFragment()
                 )
+
+                StepCounterManager.resetSteps()
+                StepCounterManager.initialize(requireContext())
             }
         }
     }

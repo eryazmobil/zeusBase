@@ -22,6 +22,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:endIconDrawable="@drawable/ic_logout"
             app:layout_constraintTop_toTopOf="parent"
             app:subTitle="Eryaz Bilgi Teknolojileri"
             app:title="Hoş Geldiniz" />
@@ -36,6 +37,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/stepTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
@@ -44,7 +52,7 @@
                     android:padding="8dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintBottom_toTopOf="@+id/settingsBtn"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stepTxt"
                     app:spanCount="2"
                     tools:listitem="@layout/item_dashboard_list" />
 

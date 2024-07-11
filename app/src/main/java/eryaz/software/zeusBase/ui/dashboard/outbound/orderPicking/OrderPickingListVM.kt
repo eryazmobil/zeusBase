@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import eryaz.software.zeusBase.R
+import eryaz.software.zeusBase.core.StepCounterManager
 import eryaz.software.zeusBase.data.api.utils.onError
 import eryaz.software.zeusBase.data.api.utils.onSuccess
 import eryaz.software.zeusBase.data.enums.ActionType
@@ -102,14 +103,14 @@ class OrderPickingListVM(private val repo: WorkActivityRepo) : BaseViewModel() {
 
     private fun createWorkAction() {
         executeInBackground(showProgressDialog = true) {
-            repo.createWorkAction(
-                activityId = TemporaryCashManager.getInstance().workActivity?.workActivityId ?: 0,
-                actionTypeCode = ActionType.PICKING.type
+            repo.createWorkActionWithStep(
+                activityId = TemporaryCashManager.getInstance().workActivity?.workActivityId.orZero(),
+                actionTypeCode = ActionType.PICKING.type,
+                startStep = StepCounterManager.getCurrentStep()
             ).onSuccess {
                 TemporaryCashManager.getInstance().workAction = it
                 _navigateToDetail.emit(true)
             }
         }
     }
-
 }

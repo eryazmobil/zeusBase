@@ -4,6 +4,7 @@ import eryaz.software.zeusBase.data.models.dto.ProductShelfWorkActivityDto
 import eryaz.software.zeusBase.data.models.remote.models.ResultModel
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfInsertRequest
 import eryaz.software.zeusBase.data.models.remote.request.ProductShelfUpdateRequest
+import eryaz.software.zeusBase.data.models.remote.request.StepCountRequest
 import eryaz.software.zeusBase.data.models.remote.response.*
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -314,5 +315,23 @@ interface WorkActivityService {
     suspend fun createProductShelfWorkActivityForPda(
         @Query("typeId") typeId: Int,
         @Body productShelfWorkActivityDto: ProductShelfWorkActivityDto
+    ): BaseResponse
+
+    @PUT("api/services/app/Step/UpdateGeneralStepByUserId")
+    suspend fun updateGeneralStepByUserId(
+        @Body stepCountRequest: StepCountRequest
+    ): BaseResponse
+
+    @POST("api/services/app/Work/CreateWorkActionWithStep")
+    suspend fun createWorkActionWithStep(
+        @Query("activityId") activityId: Int,
+        @Query("actionTypeCode") actionTypeCode: String,
+        @Query("startStep") startStep: Int
+    ):  ResultModel<WorkActionResponse>
+
+    @POST("api/services/app/Work/FinishWorkActionForStep")
+    suspend fun finishWorkActionForStep(
+        @Query("actionId") actionId: Int,
+        @Query("endStep") endStep: Int
     ): BaseResponse
 }

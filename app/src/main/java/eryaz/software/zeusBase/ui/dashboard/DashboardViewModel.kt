@@ -1,19 +1,26 @@
 package eryaz.software.zeusBase.ui.dashboard
 
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import eryaz.software.zeusBase.R
-import eryaz.software.zeusBase.data.models.dto.DashboardItemDto
+import eryaz.software.zeusBase.core.StepCounterManager
 import eryaz.software.zeusBase.data.api.utils.onSuccess
 import eryaz.software.zeusBase.data.enums.DashboardPermissionType
 import eryaz.software.zeusBase.data.models.dto.CurrentUserDto
+import eryaz.software.zeusBase.data.models.dto.DashboardItemDto
+import eryaz.software.zeusBase.data.models.remote.request.StepCountRequest
 import eryaz.software.zeusBase.data.persistence.SessionManager
 import eryaz.software.zeusBase.data.repositories.UserRepo
+import eryaz.software.zeusBase.data.repositories.WorkActivityRepo
 import eryaz.software.zeusBase.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class DashboardViewModel(private val repo: UserRepo) : BaseViewModel() {
+class DashboardViewModel(
+    private val repo: UserRepo,
+    private val workRepo: WorkActivityRepo
+) : BaseViewModel() {
     private val _dashboardItemList = MutableLiveData<List<DashboardItemDto>>(emptyList())
     val dashboardItemList: LiveData<List<DashboardItemDto>> = _dashboardItemList
 
@@ -108,8 +115,10 @@ class DashboardViewModel(private val repo: UserRepo) : BaseViewModel() {
         executeInBackground(_uiState) {
             repo.getCurrentLoginHasPermissionsForPDAMenu().onSuccess { permissionList ->
                 _dashboardItemList.value?.forEach {
-                    it.hasPermission.set(permissionList.contains(it.type.permission) || it.type
-                            == DashboardPermissionType.SETTING)
+                    it.hasPermission.set(
+                        permissionList.contains(it.type.permission) || it.type
+                                == DashboardPermissionType.SETTING
+                    )
                 }
             }
         }
@@ -119,11 +128,22 @@ class DashboardViewModel(private val repo: UserRepo) : BaseViewModel() {
             repo.getCurrentLoginInformations().onSuccess {
                 _currentUserDto.emit(it)
 
-                SessionManager.companyId = it.companyId ?: 0
-                SessionManager.warehouseId = it.warehouseId ?: 0
+                SessionManager.companyId = it.companyId
+                SessionManager.warehouseId = it.warehouseId
                 SessionManager.userId = it.userId
             }
         }
 
+    fun updateGeneralStepByUserId() = executeInBackground(showProgressDialog = true) {
+        val stepCountRequest = StepCountRequest(
+            stepCount = StepCounterManager.getCurrentStep()
+        )
 
+        workRepo.updateGeneralStepByUserId(
+            stepCountRequest = stepCountRequest
+        ).onSuccess {
+            StepCounterManager.resetSteps()
+            SessionManager.clearData()
+        }
+    }
 }
