@@ -77,7 +77,7 @@ class TransferStockCorrectionFragment : BaseFragment() {
 
         binding.deleteProduct.setOnSingleClickListener {
             findNavController().navigate(
-            TransferStockCorrectionFragmentDirections.actionTransferStockCorrectionFragmentToStockTypeFragment()
+                TransferStockCorrectionFragmentDirections.actionTransferStockCorrectionFragmentToStockTypeFragment()
             )
         }
 
@@ -115,6 +115,7 @@ class TransferStockCorrectionFragment : BaseFragment() {
             .observe(viewLifecycleOwner) {
                 if (it){
                     toast(getString(R.string.transfer_success))
+                    binding.searchProductEdt.requestFocus()
                 }
             }
 

@@ -17,7 +17,7 @@ object SessionManager {
     private const val KEY_WAREHOUSE_NAME = "warehouseName"
     private const val KEY_WAREHOUSE_ID = "warehouseId"
     private const val KEY_APP_IS_LOCK = "appLock"
-    private const val KEY_ALL_PERMISSION_ACCEPTED = "appLock"
+    private const val KEY_ALL_PERMISSION_ACCEPTED = "allPermissionAccepted"
 
     private lateinit var sharedPref: SharedPreferences
 
